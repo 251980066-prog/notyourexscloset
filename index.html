@@ -63,15 +63,16 @@
       gap: 12px;
     }
     .brand {
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       font-weight: 800;
       background: var(--lime);
       padding: 6px 12px;
       border: var(--border);
       box-shadow: 3px 3px 0 var(--ink);
       text-transform: uppercase;
+      cursor: pointer;
     }
-    .nav-actions { display: flex; gap: 10px; align-items: center; }
+    .nav-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 
     /* Buttons */
     .btn {
@@ -88,13 +89,14 @@
     }
     .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
     .btn-pink { background: var(--pink); color: #fff; }
+    .btn-cyan { background: var(--cyan); color: var(--ink); }
     .btn-dark { background: var(--ink); color: #fff; }
     .btn-white { background: #fff; color: var(--ink); }
     .btn-sm { padding: 6px 10px; font-size: 0.8rem; }
 
     /* Hero */
     .hero {
-      padding: 48px 5%;
+      padding: 44px 5%;
       background: radial-gradient(circle at top right, var(--cyan) 0%, transparent 35%), var(--bg);
       border-bottom: var(--border);
       display: grid;
@@ -114,6 +116,7 @@
     }
     .hero h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); line-height: 1.02; margin-bottom: 14px; }
     .hero p { font-size: 1.05rem; max-width: 540px; margin-bottom: 22px; line-height: 1.5; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
     .hero-box {
       background: var(--lime);
       border: var(--border);
@@ -122,18 +125,69 @@
       transform: rotate(1.5deg);
     }
 
-    /* Filters */
-    .controls {
-      padding: 20px 5%;
+    /* Shop By Category Bar */
+    .category-section {
+      padding: 22px 5%;
+      background: var(--bg);
+      border-bottom: var(--border);
+    }
+    .cat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .cat-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+    }
+    .cat-card {
+      background: var(--card);
+      border: var(--border);
+      box-shadow: 3px 3px 0 var(--ink);
+      padding: 10px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.1s;
+    }
+    .cat-card:hover { transform: translate(-1px, -1px); }
+    .cat-card.active {
+      background: var(--ink);
+      color: var(--lime);
+    }
+    .cat-count {
+      background: var(--lime);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      padding: 1px 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+    .cat-card.active .cat-count {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--lime);
+    }
+
+    /* Size & Availability Controls */
+    .controls {
+      padding: 16px 5%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
       justify-content: space-between;
       align-items: center;
       border-bottom: var(--border);
       background: #fff;
     }
-    .filter-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .filter-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .filter-label { font-weight: 800; font-size: 0.85rem; margin-right: 4px; }
     .chip {
       border: 2px solid var(--ink);
       padding: 6px 14px;
@@ -143,9 +197,19 @@
     }
     .chip.active { background: var(--ink); color: var(--lime); }
 
+    /* Active Filter Banner */
+    .rack-status {
+      padding: 18px 5% 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
     /* Product Grid */
     .grid {
-      padding: 32px 5%;
+      padding: 22px 5% 36px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
       gap: 24px;
@@ -180,6 +244,16 @@
       font-size: 0.75rem;
       font-weight: 700;
     }
+    .badge-cat {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--cyan);
+      border: 2px solid var(--ink);
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
     .badge-cond {
       position: absolute;
       bottom: 10px;
@@ -206,6 +280,16 @@
     .card-meta { font-size: 0.82rem; color: #444; font-weight: 600; margin: 6px 0 12px; }
     .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px; }
     .price { font-size: 1.2rem; font-weight: 800; }
+
+    /* Empty State */
+    .empty-state {
+      grid-column: 1 / -1;
+      background: var(--card);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 36px 20px;
+      text-align: center;
+    }
 
     /* Trust Banner & Footer */
     .trust-strip {
@@ -307,9 +391,9 @@
   </div>
 
   <header>
-    <div class="brand">NOT YOUR EX'S CLOSET</div>
+    <div class="brand" onclick="viewAllProducts()">NOT YOUR EX'S CLOSET</div>
     <div class="nav-actions">
-      <button class="btn btn-white btn-sm" onclick="openAdmin()">⚙️ OWNER PANEL</button>
+      <button class="btn btn-cyan btn-sm" onclick="viewAllProducts()">VIEW ALL PRODUCTS</button>
       <button class="btn btn-pink" onclick="openModal('bagModal')">THRIFT BAG (<span id="bagCount">0</span>)</button>
     </div>
   </header>
@@ -319,12 +403,15 @@
       <div class="hero-tag">DROP 01 // LIVE NOW</div>
       <h1>1-OF-1 HEAT.<br>ZERO FAST FASHION.</h1>
       <p>Handpicked vintage jackets, oversized streetwear, and rare graphic pieces. Every item is washed, steamed, and measured in inches. Once someone claims it, it's gone forever.</p>
-      <a href="#rack"><button class="btn">SHOP THE RACK ↓</button></a>
+      <div class="hero-btns">
+        <button class="btn" onclick="viewAllProducts()">VIEW ALL PRODUCTS (<span id="totalHeroCount">0</span>) ↓</button>
+        <a href="#categories"><button class="btn btn-white">SHOP BY CATEGORY</button></a>
+      </div>
     </div>
     <div class="hero-box">
       <h3 style="margin-bottom:8px;">HOW DROPS WORK:</h3>
       <p style="font-size:0.9rem; line-height:1.5;">
-        1. Check exact chest & length inches.<br>
+        1. Filter by category or exact inch measurements.<br>
         2. Add to bag & generate your instant order slip.<br>
         3. Tap WhatsApp or Copy for Insta DM to lock it in.<br>
         <strong>Pro Tip:</strong> Pay via SadaPay/Raast to save Rs. 150 + Free Delivery.
@@ -332,9 +419,20 @@
     </div>
   </section>
 
+  <!-- SHOP BY CATEGORY SECTION -->
+  <section class="category-section" id="categories">
+    <div class="cat-header">
+      <h3>SHOP BY CATEGORY</h3>
+      <button class="btn btn-sm btn-white" onclick="viewAllProducts()">RESET FILTERS / VIEW ALL</button>
+    </div>
+    <div class="cat-grid" id="categoryTabs"></div>
+  </section>
+
+  <!-- SIZE & AVAILABILITY FILTER BAR -->
   <section class="controls" id="rack">
     <div class="filter-group" id="sizeFilters">
-      <button class="chip active" onclick="setSize('ALL', this)">ALL SIZES</button>
+      <span class="filter-label">SIZE:</span>
+      <button class="chip active" onclick="setSize('ALL', this)">ALL</button>
       <button class="chip" onclick="setSize('S', this)">S</button>
       <button class="chip" onclick="setSize('M', this)">M</button>
       <button class="chip" onclick="setSize('L', this)">L</button>
@@ -344,6 +442,12 @@
       <button class="chip" id="availToggle" onclick="toggleAvailableOnly()">HIDE SOLD ITEMS: OFF</button>
     </div>
   </section>
+
+  <!-- LIVE RACK HEADER -->
+  <div class="rack-status">
+    <h3 id="rackHeading">SHOWING ALL PRODUCTS (6)</h3>
+    <button class="btn btn-sm btn-cyan" id="quickViewAllBtn" style="display:none;" onclick="viewAllProducts()">← VIEW ALL PRODUCTS</button>
+  </div>
 
   <main class="grid" id="productGrid"></main>
 
@@ -369,6 +473,7 @@
   <footer>
     <div>© 2026 NOT YOUR EX'S CLOSET (@notyourexscloset)</div>
     <div class="footer-links">
+      <button onclick="viewAllProducts()">View All Products</button>
       <button onclick="openPolicy('shipping')">Shipping & COD</button>
       <button onclick="openPolicy('returns')">No-Drama Return Policy</button>
       <button onclick="openPolicy('sizing')">How To Measure</button>
@@ -424,7 +529,7 @@
     </div>
   </div>
 
-  <!-- STORE OWNER ADMIN PANEL MODAL -->
+  <!-- HIDDEN STORE OWNER ADMIN PANEL MODAL -->
   <div class="overlay" id="adminModal">
     <div class="modal">
       <div class="modal-header">
@@ -451,19 +556,28 @@
       <h4 style="border-top:2px solid #000; padding-top:12px; margin-bottom:10px;">+ ADD NEW 1-OF-1 ITEM</h4>
       <div class="grid-2">
         <div class="field"><label>ITEM TITLE</label><input type="text" id="newTitle" placeholder="Vintage Nike Windbreaker"></div>
-        <div class="field"><label>PRICE (PKR)</label><input type="number" id="newPrice" placeholder="2400"></div>
+        <div class="field">
+          <label>CATEGORY</label>
+          <select id="newCategory">
+            <option value="JACKETS">JACKETS</option>
+            <option value="HOODIES">HOODIES</option>
+            <option value="TEES">TEES & SHIRTS</option>
+            <option value="BOTTOMS">BOTTOMS</option>
+          </select>
+        </div>
       </div>
       <div class="grid-2">
+        <div class="field"><label>PRICE (PKR)</label><input type="number" id="newPrice" placeholder="2400"></div>
         <div class="field">
           <label>SIZE</label>
           <select id="newSize"><option>S</option><option>M</option><option selected>L</option><option>XL</option></select>
         </div>
-        <div class="field"><label>INCHES (CHEST x LENGTH)</label><input type="text" id="newDims" placeholder='23" x 28"'></div>
       </div>
       <div class="grid-2">
+        <div class="field"><label>INCHES (CHEST x LENGTH)</label><input type="text" id="newDims" placeholder='23" x 28"'></div>
         <div class="field"><label>CONDITION</label><input type="text" id="newCond" placeholder="9.5/10"></div>
-        <div class="field"><label>IMAGE URL (OR LEAVE BLANK)</label><input type="text" id="newImg" placeholder="https://..."></div>
       </div>
+      <div class="field"><label>IMAGE URL (OR LEAVE BLANK)</label><input type="text" id="newImg" placeholder="https://..."></div>
       <button class="btn" onclick="addNewItem()" style="width:100%; margin-bottom:18px;">+ PUBLISH TO RACK</button>
 
       <h4 style="border-top:2px solid #000; padding-top:12px; margin-bottom:10px;">MANAGE LIVE RACK (MARK SOLD / DELETE)</h4>
@@ -484,37 +598,106 @@
 
   <script>
     const defaultItems = [
-      { id: "NYEC-01", title: "90s Faded Carhartt Work Jacket", size: "L", dims: '24" x 28"', cond: "9/10", price: 3200, sold: false, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" },
-      { id: "NYEC-02", title: "Boxy Washed Charcoal Hoodie", size: "M", dims: '22" x 26"', cond: "9.5/10", price: 2100, sold: false, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" },
-      { id: "NYEC-03", title: "Y2K Baggy Light-Wash Denim", size: "L", dims: '34" Waist x 41" L', cond: "9/10", price: 2500, sold: false, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80" },
-      { id: "NYEC-04", title: "Vintage Racing Graphic Tee", size: "XL", dims: '25" x 30"', cond: "8.5/10", price: 1450, sold: false, img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=600&q=80" },
-      { id: "NYEC-05", title: "Retro Colorblock Windbreaker", size: "M", dims: '22.5" x 27"', cond: "9.5/10", price: 2300, sold: true, img: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=600&q=80" },
-      { id: "NYEC-06", title: "Heavyweight Flannel Overshirt", size: "S", dims: '20.5" x 26"', cond: "9/10", price: 1750, sold: false, img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80" }
+      { id: "NYEC-01", title: "90s Faded Carhartt Work Jacket", category: "JACKETS", size: "L", dims: '24" x 28"', cond: "9/10", price: 3200, sold: false, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-02", title: "Boxy Washed Charcoal Hoodie", category: "HOODIES", size: "M", dims: '22" x 26"', cond: "9.5/10", price: 2100, sold: false, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-03", title: "Y2K Baggy Light-Wash Denim", category: "BOTTOMS", size: "L", dims: '34" Waist x 41" L', cond: "9/10", price: 2500, sold: false, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-04", title: "Vintage Racing Graphic Tee", category: "TEES", size: "XL", dims: '25" x 30"', cond: "8.5/10", price: 1450, sold: false, img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-05", title: "Retro Colorblock Windbreaker", category: "JACKETS", size: "M", dims: '22.5" x 27"', cond: "9.5/10", price: 2300, sold: true, img: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-06", title: "Heavyweight Flannel Overshirt", category: "TEES", size: "S", dims: '20.5" x 26"', cond: "9/10", price: 1750, sold: false, img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80" }
     ];
 
-    let items = JSON.parse(localStorage.getItem('nyec_items')) || defaultItems;
+    const categoriesList = [
+      { key: "ALL", label: "ALL PRODUCTS" },
+      { key: "JACKETS", label: "JACKETS" },
+      { key: "HOODIES", label: "HOODIES" },
+      { key: "TEES", label: "TEES & SHIRTS" },
+      { key: "BOTTOMS", label: "BOTTOMS" }
+    ];
+
+    let items = JSON.parse(localStorage.getItem('nyec_items_v2')) || defaultItems;
     let config = JSON.parse(localStorage.getItem('nyec_cfg')) || { whatsapp: "923001234567", insta: "notyourexscloset" };
     let bag = [];
+    let activeCategory = 'ALL';
     let activeSize = 'ALL';
     let hideSold = false;
 
     function saveData() {
-      localStorage.setItem('nyec_items', JSON.stringify(items));
+      localStorage.setItem('nyec_items_v2', JSON.stringify(items));
+    }
+
+    function renderCategoryTabs() {
+      document.getElementById('totalHeroCount').textContent = items.length;
+      const container = document.getElementById('categoryTabs');
+      container.innerHTML = categoriesList.map(cat => {
+        const count = cat.key === 'ALL'
+          ? items.length
+          : items.filter(i => i.category === cat.key).length;
+        return `
+          <div class="cat-card ${activeCategory === cat.key ? 'active' : ''}" onclick="setCategory('${cat.key}')">
+            <span>${cat.label}</span>
+            <span class="cat-count">${count}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setCategory(catKey) {
+      activeCategory = catKey;
+      renderCategoryTabs();
+      renderGrid();
+    }
+
+    function viewAllProducts() {
+      activeCategory = 'ALL';
+      activeSize = 'ALL';
+      hideSold = false;
+
+      document.querySelectorAll('#sizeFilters .chip').forEach((c, idx) => {
+        c.classList.toggle('active', idx === 0);
+      });
+      const availBtn = document.getElementById('availToggle');
+      availBtn.textContent = 'HIDE SOLD ITEMS: OFF';
+      availBtn.classList.remove('active');
+
+      renderCategoryTabs();
+      renderGrid();
+      document.getElementById('categories').scrollIntoView({ behavior: 'smooth' });
     }
 
     function renderGrid() {
       const grid = document.getElementById('productGrid');
       const filtered = items.filter(item => {
+        if (activeCategory !== 'ALL' && item.category !== activeCategory) return false;
         if (activeSize !== 'ALL' && item.size !== activeSize) return false;
         if (hideSold && item.sold) return false;
         return true;
       });
+
+      const catObj = categoriesList.find(c => c.key === activeCategory);
+      const label = catObj ? catObj.label : 'ALL PRODUCTS';
+      const sizeText = activeSize !== 'ALL' ? ` • SIZE ${activeSize}` : '';
+      document.getElementById('rackHeading').textContent = `SHOWING ${label}${sizeText} (${filtered.length})`;
+
+      const isFiltered = activeCategory !== 'ALL' || activeSize !== 'ALL' || hideSold;
+      document.getElementById('quickViewAllBtn').style.display = isFiltered ? 'inline-block' : 'none';
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <h3 style="margin-bottom:8px;">NO PIECES MATCH THIS FILTER</h3>
+            <p style="margin-bottom:16px;">Everything in this exact filter might be claimed or hasn't dropped yet.</p>
+            <button class="btn" onclick="viewAllProducts()">VIEW ALL PRODUCTS</button>
+          </div>
+        `;
+        return;
+      }
 
       grid.innerHTML = filtered.map(item => `
         <div class="card ${item.sold ? 'sold-card' : ''}">
           <div class="img-wrap">
             <img src="${item.img}" alt="${item.title}" onerror="this.src='https://placehold.co/600x600/0E0E0E/CCFF00?text=1-OF-1+DROP'">
             <div class="badge">${item.id} • SIZE ${item.size}</div>
+            <div class="badge-cat">${item.category}</div>
             <div class="badge-cond">COND ${item.cond}</div>
             ${item.sold ? '<div class="sold-stamp">SOLD OUT</div>' : ''}
           </div>
@@ -632,11 +815,11 @@
       window.open(`https://instagram.com/${config.insta}`, '_blank');
     }
 
-    /* Admin Functions */
+    /* Secret Owner Panel (Triggered only via ?admin=true + PIN 6767) */
     function openAdmin() {
-      const pass = prompt("Enter Store Owner PIN (Default: 1234):");
-      if (pass !== "1234") {
-        alert("Wrong PIN!");
+      const pass = prompt("Enter Store Owner PIN:");
+      if (pass !== "6767") {
+        alert("Access Denied.");
         return;
       }
       document.getElementById('cfgWhatsapp').value = config.whatsapp;
@@ -654,6 +837,7 @@
 
     function addNewItem() {
       const title = document.getElementById('newTitle').value.trim();
+      const category = document.getElementById('newCategory').value;
       const price = parseInt(document.getElementById('newPrice').value);
       const size = document.getElementById('newSize').value;
       const dims = document.getElementById('newDims').value.trim() || '22" x 27"';
@@ -666,8 +850,9 @@
       }
 
       const nextNum = String(items.length + 1).padStart(2, '0');
-      items.unshift({ id: `NYEC-${nextNum}`, title, size, dims, cond, price, sold: false, img });
+      items.unshift({ id: `NYEC-${nextNum}`, title, category, size, dims, cond, price, sold: false, img });
       saveData();
+      renderCategoryTabs();
       renderGrid();
       renderAdminList();
       document.getElementById('newTitle').value = '';
@@ -689,6 +874,7 @@
     function deleteItemAdmin(id) {
       items = items.filter(i => i.id !== id);
       saveData();
+      renderCategoryTabs();
       renderGrid();
       renderAdminList();
     }
@@ -696,7 +882,7 @@
     function renderAdminList() {
       document.getElementById('adminInventoryList').innerHTML = items.map(i => `
         <div class="admin-row">
-          <div style="font-size:0.85rem;"><strong>${i.id}: ${i.title}</strong> (${i.size}) — Rs. ${i.price}</div>
+          <div style="font-size:0.85rem;"><strong>${i.id}: ${i.title}</strong> [${i.category} • ${i.size}] — Rs. ${i.price}</div>
           <div style="display:flex; gap:6px;">
             <button class="btn btn-sm ${i.sold ? 'btn-pink' : ''}" onclick="toggleSoldAdmin('${i.id}')">${i.sold ? 'MARK AVAILABLE' : 'MARK SOLD'}</button>
             <button class="btn btn-sm btn-dark" onclick="deleteItemAdmin('${i.id}')">DEL</button>
@@ -725,6 +911,12 @@
     function openModal(id) { document.getElementById(id).classList.add('open'); }
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
+    /* Check if secret admin parameter is in URL */
+    if (new URLSearchParams(window.location.search).get('admin') === 'true') {
+      openAdmin();
+    }
+
+    renderCategoryTabs();
     renderGrid();
   </script>
 </body>
