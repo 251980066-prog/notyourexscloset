@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOT YOUR EX'S CLOSET // 1-of-1 Curated Thrift</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F5F4EF;
+      --ink: #0E0E0E;
+      --lime: #CCFF00;
+      --pink: #FF2E93;
+      --cyan: #00E5FF;
+      --card: #FFFFFF;
+      --border: 3px solid #0E0E0E;
+      --shadow: 5px 5px 0px #0E0E0E;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .brand { font-family: 'Syne', sans-serif; }
+
+    /* Top Marquee */
+    .marquee {
+      background: var(--ink);
+      color: var(--lime);
+      padding: 8px 0;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      border-bottom: var(--border);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 22s linear infinite;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 5%;
+      background: var(--card);
+      border-bottom: var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      gap: 12px;
+    }
+    .brand {
+      font-size: 1.45rem;
+      font-weight: 800;
+      background: var(--lime);
+      padding: 6px 12px;
+      border: var(--border);
+      box-shadow: 3px 3px 0 var(--ink);
+      text-transform: uppercase;
+    }
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+
+    /* Buttons */
+    .btn {
+      background: var(--lime);
+      color: var(--ink);
+      border: var(--border);
+      padding: 10px 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.1s;
+      font-size: 0.9rem;
+    }
+    .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+    .btn-pink { background: var(--pink); color: #fff; }
+    .btn-dark { background: var(--ink); color: #fff; }
+    .btn-white { background: #fff; color: var(--ink); }
+    .btn-sm { padding: 6px 10px; font-size: 0.8rem; }
+
+    /* Hero */
+    .hero {
+      padding: 48px 5%;
+      background: radial-gradient(circle at top right, var(--cyan) 0%, transparent 35%), var(--bg);
+      border-bottom: var(--border);
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--pink);
+      color: #fff;
+      font-weight: 700;
+      padding: 4px 12px;
+      border: var(--border);
+      margin-bottom: 14px;
+      transform: rotate(-1.5deg);
+    }
+    .hero h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); line-height: 1.02; margin-bottom: 14px; }
+    .hero p { font-size: 1.05rem; max-width: 540px; margin-bottom: 22px; line-height: 1.5; }
+    .hero-box {
+      background: var(--lime);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      transform: rotate(1.5deg);
+    }
+
+    /* Filters */
+    .controls {
+      padding: 20px 5%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: var(--border);
+      background: #fff;
+    }
+    .filter-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      border: 2px solid var(--ink);
+      padding: 6px 14px;
+      font-weight: 700;
+      background: var(--bg);
+      cursor: pointer;
+    }
+    .chip.active { background: var(--ink); color: var(--lime); }
+
+    /* Product Grid */
+    .grid {
+      padding: 32px 5%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--card);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .card.sold-card { opacity: 0.78; }
+    .img-wrap {
+      height: 270px;
+      border-bottom: var(--border);
+      background: #EAE8E1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--lime);
+      border: 2px solid var(--ink);
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .badge-cond {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: var(--ink);
+      color: #fff;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .sold-stamp {
+      position: absolute;
+      background: var(--pink);
+      color: #fff;
+      border: 3px solid var(--ink);
+      padding: 8px 18px;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      transform: rotate(-12deg);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .card-meta { font-size: 0.82rem; color: #444; font-weight: 600; margin: 6px 0 12px; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px; }
+    .price { font-size: 1.2rem; font-weight: 800; }
+
+    /* Trust Banner & Footer */
+    .trust-strip {
+      background: var(--ink);
+      color: #fff;
+      padding: 28px 5%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      border-top: var(--border);
+    }
+    .trust-item h4 { color: var(--lime); margin-bottom: 6px; font-size: 1rem; }
+    .trust-item p { font-size: 0.88rem; color: #ddd; line-height: 1.45; }
+    footer {
+      background: var(--lime);
+      border-top: var(--border);
+      padding: 24px 5%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 14px; }
+    .footer-links button { background: none; border: none; font-weight: 700; text-decoration: underline; cursor: pointer; font-family: inherit; font-size: 0.92rem; }
+
+    /* Drawers & Modals */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      padding: 16px;
+    }
+    .overlay.open { display: flex; }
+    .modal {
+      background: var(--card);
+      border: var(--border);
+      box-shadow: 8px 8px 0 var(--ink);
+      width: 100%;
+      max-width: 540px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+      position: relative;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .field { margin-bottom: 12px; }
+    .field label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 4px; }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      font-family: inherit;
+      font-size: 0.92rem;
+      background: var(--bg);
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .receipt-box {
+      background: #111;
+      color: var(--lime);
+      padding: 12px;
+      font-family: monospace;
+      font-size: 0.82rem;
+      white-space: pre-wrap;
+      border: 2px solid var(--ink);
+      margin: 12px 0;
+    }
+    .admin-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
+      border: 2px solid var(--ink);
+      margin-bottom: 8px;
+      background: var(--bg);
+      gap: 8px;
+    }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="marquee">
+    <span>1-OF-1 CURATED VINTAGE & STREETWEAR // NO RESTOCKS ONCE GONE // RS. 150 OFF + FREE SHIPPING ON SADAPAY / NAYAPAY / RAAST // NATIONWIDE COD DELIVERY // BETTER TASTE THAN YOUR EX // </span>
+  </div>
+
+  <header>
+    <div class="brand">NOT YOUR EX'S CLOSET</div>
+    <div class="nav-actions">
+      <button class="btn btn-white btn-sm" onclick="openAdmin()">⚙️ OWNER PANEL</button>
+      <button class="btn btn-pink" onclick="openModal('bagModal')">THRIFT BAG (<span id="bagCount">0</span>)</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="hero-tag">DROP 01 // LIVE NOW</div>
+      <h1>1-OF-1 HEAT.<br>ZERO FAST FASHION.</h1>
+      <p>Handpicked vintage jackets, oversized streetwear, and rare graphic pieces. Every item is washed, steamed, and measured in inches. Once someone claims it, it's gone forever.</p>
+      <a href="#rack"><button class="btn">SHOP THE RACK ↓</button></a>
+    </div>
+    <div class="hero-box">
+      <h3 style="margin-bottom:8px;">HOW DROPS WORK:</h3>
+      <p style="font-size:0.9rem; line-height:1.5;">
+        1. Check exact chest & length inches.<br>
+        2. Add to bag & generate your instant order slip.<br>
+        3. Tap WhatsApp or Copy for Insta DM to lock it in.<br>
+        <strong>Pro Tip:</strong> Pay via SadaPay/Raast to save Rs. 150 + Free Delivery.
+      </p>
+    </div>
+  </section>
+
+  <section class="controls" id="rack">
+    <div class="filter-group" id="sizeFilters">
+      <button class="chip active" onclick="setSize('ALL', this)">ALL SIZES</button>
+      <button class="chip" onclick="setSize('S', this)">S</button>
+      <button class="chip" onclick="setSize('M', this)">M</button>
+      <button class="chip" onclick="setSize('L', this)">L</button>
+      <button class="chip" onclick="setSize('XL', this)">XL</button>
+    </div>
+    <div class="filter-group">
+      <button class="chip" id="availToggle" onclick="toggleAvailableOnly()">HIDE SOLD ITEMS: OFF</button>
+    </div>
+  </section>
+
+  <main class="grid" id="productGrid"></main>
+
+  <section class="trust-strip">
+    <div class="trust-item">
+      <h4>🧼 SANITIZED & READY</h4>
+      <p>Every piece is deep-washed, steam-pressed, and inspected before hitting the rack.</p>
+    </div>
+    <div class="trust-item">
+      <h4>📏 TRUE INCH MEASUREMENTS</h4>
+      <p>Vintage tags lie—our tape measure doesn't. Check pit-to-pit & length before claiming.</p>
+    </div>
+    <div class="trust-item">
+      <h4>🚚 2–4 DAY PAKISTAN DELIVERY</h4>
+      <p>Dispatched via PostEx / Leopards / TCS with tracking ID shared on WhatsApp.</p>
+    </div>
+    <div class="trust-item">
+      <h4>💸 COD OR INSTANT TRANSFER</h4>
+      <p>Cash on Delivery available nationwide, or get Rs. 150 off via SadaPay / NayaPay / Raast.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 NOT YOUR EX'S CLOSET (@notyourexscloset)</div>
+    <div class="footer-links">
+      <button onclick="openPolicy('shipping')">Shipping & COD</button>
+      <button onclick="openPolicy('returns')">No-Drama Return Policy</button>
+      <button onclick="openPolicy('sizing')">How To Measure</button>
+    </div>
+  </footer>
+
+  <!-- THRIFT BAG & CHECKOUT MODAL -->
+  <div class="overlay" id="bagModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>YOUR THRIFT BAG</h3>
+        <button class="btn btn-sm btn-dark" onclick="closeModal('bagModal')">X</button>
+      </div>
+      <div id="bagItems"></div>
+
+      <div id="checkoutForm" style="display:none; margin-top:16px; border-top:2px solid #000; padding-top:14px;">
+        <div class="grid-2">
+          <div class="field">
+            <label>YOUR NAME</label>
+            <input type="text" id="custName" placeholder="e.g. Ali Raza" oninput="updateReceipt()">
+          </div>
+          <div class="field">
+            <label>PHONE NUMBER</label>
+            <input type="text" id="custPhone" placeholder="03XX-XXXXXXX" oninput="updateReceipt()">
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>CITY</label>
+            <input type="text" id="custCity" placeholder="e.g. Lahore / Gujranwala" oninput="updateReceipt()">
+          </div>
+          <div class="field">
+            <label>PAYMENT METHOD</label>
+            <select id="payMethod" onchange="updateReceipt()">
+              <option value="DIGITAL">SadaPay / NayaPay / Raast (Rs. 150 OFF + Free Shipping)</option>
+              <option value="COD">Cash on Delivery (+ Rs. 200 Shipping)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>COMPLETE DELIVERY ADDRESS</label>
+          <input type="text" id="custAddress" placeholder="House #, Street, Area" oninput="updateReceipt()">
+        </div>
+
+        <label style="font-weight:700; font-size:0.85rem;">LIVE ORDER SLIP:</label>
+        <div class="receipt-box" id="receiptPreview"></div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <button class="btn" onclick="sendWhatsApp()">📲 LOCK ORDER ON WHATSAPP</button>
+          <button class="btn btn-pink" onclick="copyInstaDM()">📋 COPY SLIP FOR INSTAGRAM DM</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORE OWNER ADMIN PANEL MODAL -->
+  <div class="overlay" id="adminModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>⚙️ STORE OWNER PANEL</h3>
+        <button class="btn btn-sm btn-dark" onclick="closeModal('adminModal')">X</button>
+      </div>
+
+      <div style="background:var(--lime); padding:10px; border:2px solid #000; margin-bottom:14px; font-size:0.85rem;">
+        <strong>Store Config:</strong> Update your WhatsApp number (format: <code>923001234567</code>) & Instagram handle so customer orders come straight to you.
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label>YOUR WHATSAPP (WITH 92)</label>
+          <input type="text" id="cfgWhatsapp" placeholder="923001234567">
+        </div>
+        <div class="field">
+          <label>INSTAGRAM USERNAME</label>
+          <input type="text" id="cfgInsta" placeholder="notyourexscloset">
+        </div>
+      </div>
+      <button class="btn btn-sm btn-dark" onclick="saveConfig()" style="margin-bottom:18px;">SAVE CONTACT SETTINGS</button>
+
+      <h4 style="border-top:2px solid #000; padding-top:12px; margin-bottom:10px;">+ ADD NEW 1-OF-1 ITEM</h4>
+      <div class="grid-2">
+        <div class="field"><label>ITEM TITLE</label><input type="text" id="newTitle" placeholder="Vintage Nike Windbreaker"></div>
+        <div class="field"><label>PRICE (PKR)</label><input type="number" id="newPrice" placeholder="2400"></div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>SIZE</label>
+          <select id="newSize"><option>S</option><option>M</option><option selected>L</option><option>XL</option></select>
+        </div>
+        <div class="field"><label>INCHES (CHEST x LENGTH)</label><input type="text" id="newDims" placeholder='23" x 28"'></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>CONDITION</label><input type="text" id="newCond" placeholder="9.5/10"></div>
+        <div class="field"><label>IMAGE URL (OR LEAVE BLANK)</label><input type="text" id="newImg" placeholder="https://..."></div>
+      </div>
+      <button class="btn" onclick="addNewItem()" style="width:100%; margin-bottom:18px;">+ PUBLISH TO RACK</button>
+
+      <h4 style="border-top:2px solid #000; padding-top:12px; margin-bottom:10px;">MANAGE LIVE RACK (MARK SOLD / DELETE)</h4>
+      <div id="adminInventoryList"></div>
+    </div>
+  </div>
+
+  <!-- POLICY / FAQ MODAL -->
+  <div class="overlay" id="policyModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="policyTitle">INFO</h3>
+        <button class="btn btn-sm btn-dark" onclick="closeModal('policyModal')">X</button>
+      </div>
+      <div id="policyBody" style="line-height:1.6; font-size:0.95rem;"></div>
+    </div>
+  </div>
+
+  <script>
+    const defaultItems = [
+      { id: "NYEC-01", title: "90s Faded Carhartt Work Jacket", size: "L", dims: '24" x 28"', cond: "9/10", price: 3200, sold: false, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-02", title: "Boxy Washed Charcoal Hoodie", size: "M", dims: '22" x 26"', cond: "9.5/10", price: 2100, sold: false, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-03", title: "Y2K Baggy Light-Wash Denim", size: "L", dims: '34" Waist x 41" L', cond: "9/10", price: 2500, sold: false, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-04", title: "Vintage Racing Graphic Tee", size: "XL", dims: '25" x 30"', cond: "8.5/10", price: 1450, sold: false, img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-05", title: "Retro Colorblock Windbreaker", size: "M", dims: '22.5" x 27"', cond: "9.5/10", price: 2300, sold: true, img: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-06", title: "Heavyweight Flannel Overshirt", size: "S", dims: '20.5" x 26"', cond: "9/10", price: 1750, sold: false, img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80" }
+    ];
+
+    let items = JSON.parse(localStorage.getItem('nyec_items')) || defaultItems;
+    let config = JSON.parse(localStorage.getItem('nyec_cfg')) || { whatsapp: "923001234567", insta: "notyourexscloset" };
+    let bag = [];
+    let activeSize = 'ALL';
+    let hideSold = false;
+
+    function saveData() {
+      localStorage.setItem('nyec_items', JSON.stringify(items));
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('productGrid');
+      const filtered = items.filter(item => {
+        if (activeSize !== 'ALL' && item.size !== activeSize) return false;
+        if (hideSold && item.sold) return false;
+        return true;
+      });
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="card ${item.sold ? 'sold-card' : ''}">
+          <div class="img-wrap">
+            <img src="${item.img}" alt="${item.title}" onerror="this.src='https://placehold.co/600x600/0E0E0E/CCFF00?text=1-OF-1+DROP'">
+            <div class="badge">${item.id} • SIZE ${item.size}</div>
+            <div class="badge-cond">COND ${item.cond}</div>
+            ${item.sold ? '<div class="sold-stamp">SOLD OUT</div>' : ''}
+          </div>
+          <div class="card-body">
+            <div>
+              <h3>${item.title}</h3>
+              <div class="card-meta">Measurements: ${item.dims}</div>
+            </div>
+            <div class="price-row">
+              <div class="price">Rs. ${item.price.toLocaleString()}</div>
+              ${item.sold
+                ? '<button class="btn btn-sm btn-dark" disabled>CLAIMED</button>'
+                : `<button class="btn btn-sm" onclick="addToBag('${item.id}')">+ CLAIM</button>`}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setSize(size, el) {
+      activeSize = size;
+      document.querySelectorAll('#sizeFilters .chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      renderGrid();
+    }
+
+    function toggleAvailableOnly() {
+      hideSold = !hideSold;
+      const btn = document.getElementById('availToggle');
+      btn.textContent = `HIDE SOLD ITEMS: ${hideSold ? 'ON' : 'OFF'}`;
+      btn.classList.toggle('active', hideSold);
+      renderGrid();
+    }
+
+    function addToBag(id) {
+      if (bag.find(i => i.id === id)) {
+        openModal('bagModal');
+        return;
+      }
+      const item = items.find(i => i.id === id);
+      if (item && !item.sold) {
+        bag.push(item);
+        updateBagUI();
+        openModal('bagModal');
+      }
+    }
+
+    function removeFromBag(id) {
+      bag = bag.filter(i => i.id !== id);
+      updateBagUI();
+    }
+
+    function updateBagUI() {
+      document.getElementById('bagCount').textContent = bag.length;
+      const container = document.getElementById('bagItems');
+      const form = document.getElementById('checkoutForm');
+
+      if (bag.length === 0) {
+        container.innerHTML = "<p>Your bag is empty. Go claim a 1-of-1 piece before someone else does.</p>";
+        form.style.display = "none";
+        return;
+      }
+
+      container.innerHTML = bag.map(i => `
+        <div class="admin-row">
+          <div><strong>${i.title}</strong> (${i.id} - Size ${i.size})<br>Rs. ${i.price.toLocaleString()}</div>
+          <button class="btn btn-sm btn-pink" onclick="removeFromBag('${i.id}')">REMOVE</button>
+        </div>
+      `).join('');
+      form.style.display = "block";
+      updateReceipt();
+    }
+
+    function getOrderSummary() {
+      const subtotal = bag.reduce((sum, i) => sum + i.price, 0);
+      const isDigital = document.getElementById('payMethod').value === 'DIGITAL';
+      const discount = isDigital ? 150 : 0;
+      const shipping = isDigital ? 0 : 200;
+      const total = subtotal - discount + shipping;
+
+      const name = document.getElementById('custName').value || '[Your Name]';
+      const phone = document.getElementById('custPhone').value || '[Phone]';
+      const city = document.getElementById('custCity').value || '[City]';
+      const addr = document.getElementById('custAddress').value || '[Address]';
+      const itemLines = bag.map(i => `- ${i.id}: ${i.title} (${i.size}) — Rs. ${i.price}`).join('\n');
+
+      return `HEY NOT YOUR EX'S CLOSET! I WANT TO LOCK THIS ORDER:\n\n${itemLines}\n\nSubtotal: Rs. ${subtotal}\n${isDigital ? 'Digital Pay Discount: -Rs. 150\nShipping: FREE' : 'COD Shipping: +Rs. 200'}\nTOTAL PAYABLE: Rs. ${total}\nPayment: ${isDigital ? 'SadaPay / NayaPay / Raast' : 'Cash on Delivery (COD)'}\n\nName: ${name}\nPhone: ${phone}\nCity: ${city}\nAddress: ${addr}`;
+    }
+
+    function updateReceipt() {
+      document.getElementById('receiptPreview').textContent = getOrderSummary();
+    }
+
+    function markBagSold() {
+      bag.forEach(b => {
+        const target = items.find(i => i.id === b.id);
+        if (target) target.sold = true;
+      });
+      saveData();
+      bag = [];
+      updateBagUI();
+      renderGrid();
+    }
+
+    function sendWhatsApp() {
+      const text = encodeURIComponent(getOrderSummary());
+      markBagSold();
+      window.open(`https://wa.me/${config.whatsapp}?text=${text}`, '_blank');
+    }
+
+    function copyInstaDM() {
+      navigator.clipboard.writeText(getOrderSummary());
+      markBagSold();
+      alert(`Order slip copied! Opening @${config.insta} — just paste it into our DM.`);
+      window.open(`https://instagram.com/${config.insta}`, '_blank');
+    }
+
+    /* Admin Functions */
+    function openAdmin() {
+      const pass = prompt("Enter Store Owner PIN (Default: 1234):");
+      if (pass !== "1234") {
+        alert("Wrong PIN!");
+        return;
+      }
+      document.getElementById('cfgWhatsapp').value = config.whatsapp;
+      document.getElementById('cfgInsta').value = config.insta;
+      renderAdminList();
+      openModal('adminModal');
+    }
+
+    function saveConfig() {
+      config.whatsapp = document.getElementById('cfgWhatsapp').value.trim();
+      config.insta = document.getElementById('cfgInsta').value.trim();
+      localStorage.setItem('nyec_cfg', JSON.stringify(config));
+      alert("WhatsApp & Instagram settings saved!");
+    }
+
+    function addNewItem() {
+      const title = document.getElementById('newTitle').value.trim();
+      const price = parseInt(document.getElementById('newPrice').value);
+      const size = document.getElementById('newSize').value;
+      const dims = document.getElementById('newDims').value.trim() || '22" x 27"';
+      const cond = document.getElementById('newCond').value.trim() || '9/10';
+      const img = document.getElementById('newImg').value.trim() || 'https://placehold.co/600x600/0E0E0E/CCFF00?text=NEW+DROP';
+
+      if (!title || !price) {
+        alert("Please enter at least an item title and price.");
+        return;
+      }
+
+      const nextNum = String(items.length + 1).padStart(2, '0');
+      items.unshift({ id: `NYEC-${nextNum}`, title, size, dims, cond, price, sold: false, img });
+      saveData();
+      renderGrid();
+      renderAdminList();
+      document.getElementById('newTitle').value = '';
+      document.getElementById('newPrice').value = '';
+      document.getElementById('newImg').value = '';
+      alert("Item published to the rack!");
+    }
+
+    function toggleSoldAdmin(id) {
+      const item = items.find(i => i.id === id);
+      if (item) {
+        item.sold = !item.sold;
+        saveData();
+        renderGrid();
+        renderAdminList();
+      }
+    }
+
+    function deleteItemAdmin(id) {
+      items = items.filter(i => i.id !== id);
+      saveData();
+      renderGrid();
+      renderAdminList();
+    }
+
+    function renderAdminList() {
+      document.getElementById('adminInventoryList').innerHTML = items.map(i => `
+        <div class="admin-row">
+          <div style="font-size:0.85rem;"><strong>${i.id}: ${i.title}</strong> (${i.size}) — Rs. ${i.price}</div>
+          <div style="display:flex; gap:6px;">
+            <button class="btn btn-sm ${i.sold ? 'btn-pink' : ''}" onclick="toggleSoldAdmin('${i.id}')">${i.sold ? 'MARK AVAILABLE' : 'MARK SOLD'}</button>
+            <button class="btn btn-sm btn-dark" onclick="deleteItemAdmin('${i.id}')">DEL</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* Policy Modals */
+    function openPolicy(type) {
+      const title = document.getElementById('policyTitle');
+      const body = document.getElementById('policyBody');
+      if (type === 'shipping') {
+        title.textContent = "SHIPPING & COD INFO";
+        body.innerHTML = "<p><strong>Dispatch Time:</strong> Orders confirmed before 4 PM ship the same day.<br><br><strong>Delivery Time:</strong> 2–4 working days across Pakistan via PostEx, Leopards, or TCS.<br><br><strong>Charges:</strong> Rs. 200 flat for Cash on Delivery, or <strong>FREE</strong> when you pay via SadaPay, NayaPay, or Raast.</p>";
+      } else if (type === 'returns') {
+        title.textContent = "NO-DRAMA RETURN POLICY";
+        body.innerHTML = "<p>Because every piece is a <strong>1-of-1 curated thrift item</strong>, we do not offer size exchanges or change-of-mind returns.<br><br>However, if we ever miss a major flaw or send the wrong item, message us within 24 hours of delivery with an unboxing video for a <strong>full refund</strong>.</p>";
+      } else {
+        title.textContent = "HOW TO MEASURE YOUR FIT";
+        body.innerHTML = "<p>Grab your favorite hoodie or shirt, lay it flat on a bed, and measure:<br><br>1. <strong>Chest (Pit-to-Pit):</strong> Straight across from underarm to underarm.<br>2. <strong>Length:</strong> From the top of the shoulder collar straight down to the bottom hem.<br><br>Compare those two numbers to the inches listed on each card—guaranteed accurate fit every time.</p>";
+      }
+      openModal('policyModal');
+    }
+
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+    renderGrid();
+  </script>
+</body>
+</html>
