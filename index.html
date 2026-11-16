@@ -48,7 +48,6 @@
     #intro3d.done {
       pointer-events: none;
     }
-    /* Split 3D Vault Doors */
     .vault-door {
       position: absolute;
       top: 0;
@@ -80,7 +79,6 @@
       transform: rotateY(105deg) translateX(100%);
     }
 
-    /* 3D Center Stage */
     .intro-stage {
       position: relative;
       z-index: 2;
@@ -101,7 +99,6 @@
       opacity: 0;
     }
 
-    /* 3D Cube */
     .scene-3d {
       width: 115px;
       height: 115px;
@@ -149,7 +146,6 @@
       100% { transform: rotateX(16deg) rotateY(360deg); }
     }
 
-    /* 3D Extruded Brand Name Fly-In */
     .brand-3d-wrap {
       perspective: 950px;
       margin-bottom: 16px;
@@ -208,7 +204,6 @@
       animation: fadeUpElem 0.65s ease 0.8s forwards;
     }
 
-    /* Centered 3D Shop Now CTA Button */
     .shop-now-3d {
       background: var(--lime);
       color: var(--ink);
@@ -607,6 +602,38 @@
       background: var(--bg);
       gap: 8px;
     }
+    /* Order Confirmation Card */
+    .confirm-box {
+      background: var(--bg);
+      border: 3px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      padding: 18px;
+      text-align: center;
+    }
+    .confirm-badge {
+      display: inline-block;
+      background: var(--lime);
+      border: 2px solid var(--ink);
+      padding: 4px 12px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+    .tracking-pill {
+      background: var(--ink);
+      color: var(--lime);
+      font-family: monospace;
+      font-size: 1.2rem;
+      font-weight: 800;
+      padding: 12px 16px;
+      border: 2px solid var(--ink);
+      margin: 12px 0;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
     @media (max-width: 768px) {
       .hero { grid-template-columns: 1fr; }
     }
@@ -645,7 +672,7 @@
     <div class="brand" onclick="viewAllProducts()">NOT YOUR EX'S CLOSET</div>
     <div class="nav-actions">
       <button class="btn btn-cyan btn-sm" onclick="viewAllProducts()">VIEW ALL PRODUCTS</button>
-      <button class="btn btn-pink" onclick="openModal('bagModal')">THRIFT BAG (<span id="bagCount">0</span>)</button>
+      <button class="btn btn-pink" onclick="openBagModal()">THRIFT BAG (<span id="bagCount">0</span>)</button>
     </div>
   </header>
 
@@ -731,50 +758,76 @@
     </div>
   </footer>
 
-  <!-- THRIFT BAG & CHECKOUT MODAL -->
+  <!-- THRIFT BAG, CHECKOUT & INSTANT TRACKING CONFIRMATION MODAL -->
   <div class="overlay" id="bagModal">
     <div class="modal">
       <div class="modal-header">
-        <h3>YOUR THRIFT BAG</h3>
+        <h3 id="bagModalTitle">YOUR THRIFT BAG</h3>
         <button class="btn btn-sm btn-dark" onclick="closeModal('bagModal')">X</button>
       </div>
-      <div id="bagItems"></div>
 
-      <div id="checkoutForm" style="display:none; margin-top:16px; border-top:2px solid #000; padding-top:14px;">
-        <div class="grid-2">
-          <div class="field">
-            <label>YOUR NAME</label>
-            <input type="text" id="custName" placeholder="e.g. Ali Raza" oninput="updateReceipt()">
+      <!-- STEP 1: BAG & FORM VIEW -->
+      <div id="bagCheckoutView">
+        <div id="bagItems"></div>
+
+        <div id="checkoutForm" style="display:none; margin-top:16px; border-top:2px solid #000; padding-top:14px;">
+          <div class="grid-2">
+            <div class="field">
+              <label>YOUR NAME</label>
+              <input type="text" id="custName" placeholder="e.g. Ali Raza" oninput="updateReceipt()">
+            </div>
+            <div class="field">
+              <label>PHONE NUMBER</label>
+              <input type="text" id="custPhone" placeholder="03XX-XXXXXXX" oninput="updateReceipt()">
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label>CITY</label>
+              <input type="text" id="custCity" placeholder="e.g. Lahore / Gujranwala" oninput="updateReceipt()">
+            </div>
+            <div class="field">
+              <label>PAYMENT METHOD</label>
+              <select id="payMethod" onchange="updateReceipt()">
+                <option value="DIGITAL">SadaPay / NayaPay / Raast (Rs. 150 OFF + Free Shipping)</option>
+                <option value="COD">Cash on Delivery (+ Rs. 200 Shipping)</option>
+              </select>
+            </div>
           </div>
           <div class="field">
-            <label>PHONE NUMBER</label>
-            <input type="text" id="custPhone" placeholder="03XX-XXXXXXX" oninput="updateReceipt()">
+            <label>COMPLETE DELIVERY ADDRESS</label>
+            <input type="text" id="custAddress" placeholder="House #, Street, Area" oninput="updateReceipt()">
+          </div>
+
+          <label style="font-weight:700; font-size:0.85rem;">LIVE ORDER SLIP (AUTO-TRACKING ID):</label>
+          <div class="receipt-box" id="receiptPreview"></div>
+
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <button class="btn" onclick="sendWhatsApp()">📲 LOCK ORDER ON WHATSAPP</button>
+            <button class="btn btn-pink" onclick="copyInstaDM()">📋 COPY SLIP FOR INSTAGRAM DM</button>
           </div>
         </div>
-        <div class="grid-2">
-          <div class="field">
-            <label>CITY</label>
-            <input type="text" id="custCity" placeholder="e.g. Lahore / Gujranwala" oninput="updateReceipt()">
-          </div>
-          <div class="field">
-            <label>PAYMENT METHOD</label>
-            <select id="payMethod" onchange="updateReceipt()">
-              <option value="DIGITAL">SadaPay / NayaPay / Raast (Rs. 150 OFF + Free Shipping)</option>
-              <option value="COD">Cash on Delivery (+ Rs. 200 Shipping)</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label>COMPLETE DELIVERY ADDRESS</label>
-          <input type="text" id="custAddress" placeholder="House #, Street, Area" oninput="updateReceipt()">
-        </div>
+      </div>
 
-        <label style="font-weight:700; font-size:0.85rem;">LIVE ORDER SLIP:</label>
-        <div class="receipt-box" id="receiptPreview"></div>
+      <!-- STEP 2: CUSTOMER ORDER CONFIRMED + TRACKING ID VIEW -->
+      <div id="orderConfirmedView" style="display:none;">
+        <div class="confirm-box">
+          <div class="confirm-badge">✓ ORDER SLIP GENERATED & RESERVED</div>
+          <h2 style="margin-bottom:6px;">ORDER CONFIRMED!</h2>
+          <p style="font-size:0.9rem; color:#333;">Save your Tracking ID below. Share it anytime on WhatsApp or Instagram DM to check your parcel status.</p>
 
-        <div style="display:flex; flex-direction:column; gap:10px;">
-          <button class="btn" onclick="sendWhatsApp()">📲 LOCK ORDER ON WHATSAPP</button>
-          <button class="btn btn-pink" onclick="copyInstaDM()">📋 COPY SLIP FOR INSTAGRAM DM</button>
+          <div class="tracking-pill">
+            <span id="confirmedTrackingId">NYEC-TRK-0000</span>
+            <button class="btn btn-sm" onclick="copyTrackingId()">COPY ID</button>
+          </div>
+
+          <div class="receipt-box" id="confirmedReceiptCopy" style="text-align:left;"></div>
+
+          <p style="font-size:0.84rem; margin-bottom:14px; line-height:1.45;">
+            <strong>Next Step:</strong> Make sure you hit <strong>Send</strong> in WhatsApp (or paste in Insta DM) so our team dispatches your parcel within 24 hours via PostEx / Leopards / TCS.
+          </p>
+
+          <button class="btn btn-cyan" style="width:100%;" onclick="closeModal('bagModal')">CONTINUE BROWSING RACK</button>
         </div>
       </div>
     </div>
@@ -859,7 +912,6 @@
       setTimeout(() => { intro.style.display = 'none'; }, 950);
     }
 
-    /* Subtle 3D Parallax Tilt on Entry Screen */
     const introOverlay = document.getElementById('intro3d');
     const introStage = document.getElementById('introStage');
     introOverlay.addEventListener('mousemove', (e) => {
@@ -869,7 +921,6 @@
       introStage.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
     });
 
-    /* 3D Interactive Card & Hero Tilt */
     function bind3DTilt() {
       const targets = document.querySelectorAll('.card, #hero3dBox');
       targets.forEach(el => {
@@ -903,11 +954,17 @@
     ];
 
     let items = JSON.parse(localStorage.getItem('nyec_items_v2')) || defaultItems;
-    let config = JSON.parse(localStorage.getItem('nyec_cfg')) || { whatsapp: "923167271822", insta: "notyourexscloset" };
+    let config = JSON.parse(localStorage.getItem('nyec_cfg')) || { whatsapp: "923001234567", insta: "notyourexscloset" };
     let bag = [];
     let activeCategory = 'ALL';
     let activeSize = 'ALL';
     let hideSold = false;
+    let currentTrackingId = generateTrackingId();
+
+    function generateTrackingId() {
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      return `NYEC-TRK-${rand}`;
+    }
 
     function saveData() {
       localStorage.setItem('nyec_items_v2', JSON.stringify(items));
@@ -1022,16 +1079,24 @@
       renderGrid();
     }
 
+    function openBagModal() {
+      document.getElementById('bagModalTitle').textContent = "YOUR THRIFT BAG";
+      document.getElementById('bagCheckoutView').style.display = "block";
+      document.getElementById('orderConfirmedView').style.display = "none";
+      updateBagUI();
+      openModal('bagModal');
+    }
+
     function addToBag(id) {
       if (bag.find(i => i.id === id)) {
-        openModal('bagModal');
+        openBagModal();
         return;
       }
       const item = items.find(i => i.id === id);
       if (item && !item.sold) {
+        if (bag.length === 0) currentTrackingId = generateTrackingId();
         bag.push(item);
-        updateBagUI();
-        openModal('bagModal');
+        openBagModal();
       }
     }
 
@@ -1074,11 +1139,25 @@
       const addr = document.getElementById('custAddress').value || '[Address]';
       const itemLines = bag.map(i => `- ${i.id}: ${i.title} (${i.size}) — Rs. ${i.price}`).join('\n');
 
-      return `HEY NOT YOUR EX'S CLOSET! I WANT TO LOCK THIS ORDER:\n\n${itemLines}\n\nSubtotal: Rs. ${subtotal}\n${isDigital ? 'Digital Pay Discount: -Rs. 150\nShipping: FREE' : 'COD Shipping: +Rs. 200'}\nTOTAL PAYABLE: Rs. ${total}\nPayment: ${isDigital ? 'SadaPay / NayaPay / Raast' : 'Cash on Delivery (COD)'}\n\nName: ${name}\nPhone: ${phone}\nCity: ${city}\nAddress: ${addr}`;
+      return `HEY NOT YOUR EX'S CLOSET! I WANT TO LOCK THIS ORDER:\nTracking ID: ${currentTrackingId}\n\n${itemLines}\n\nSubtotal: Rs. ${subtotal}\n${isDigital ? 'Digital Pay Discount: -Rs. 150\nShipping: FREE' : 'COD Shipping: +Rs. 200'}\nTOTAL PAYABLE: Rs. ${total}\nPayment: ${isDigital ? 'SadaPay / NayaPay / Raast' : 'Cash on Delivery (COD)'}\n\nName: ${name}\nPhone: ${phone}\nCity: ${city}\nAddress: ${addr}`;
     }
 
     function updateReceipt() {
       document.getElementById('receiptPreview').textContent = getOrderSummary();
+    }
+
+    function showCustomerConfirmation(finalSlip, trkId) {
+      document.getElementById('bagModalTitle').textContent = "CONFIRMATION & TRACKING";
+      document.getElementById('bagCheckoutView').style.display = "none";
+      document.getElementById('orderConfirmedView').style.display = "block";
+      document.getElementById('confirmedTrackingId').textContent = trkId;
+      document.getElementById('confirmedReceiptCopy').textContent = finalSlip;
+    }
+
+    function copyTrackingId() {
+      const trk = document.getElementById('confirmedTrackingId').textContent;
+      navigator.clipboard.writeText(trk);
+      alert(`Tracking ID ${trk} copied to clipboard!`);
     }
 
     function markBagSold() {
@@ -1088,20 +1167,26 @@
       });
       saveData();
       bag = [];
-      updateBagUI();
+      document.getElementById('bagCount').textContent = "0";
       renderGrid();
     }
 
     function sendWhatsApp() {
-      const text = encodeURIComponent(getOrderSummary());
+      const slip = getOrderSummary();
+      const trk = currentTrackingId;
+      const text = encodeURIComponent(slip);
       markBagSold();
+      showCustomerConfirmation(slip, trk);
       window.open(`https://wa.me/${config.whatsapp}?text=${text}`, '_blank');
     }
 
     function copyInstaDM() {
-      navigator.clipboard.writeText(getOrderSummary());
+      const slip = getOrderSummary();
+      const trk = currentTrackingId;
+      navigator.clipboard.writeText(slip);
       markBagSold();
-      alert(`Order slip copied! Opening @${config.insta} — just paste it into our DM.`);
+      showCustomerConfirmation(slip, trk);
+      alert(`Order slip & Tracking ID (${trk}) copied! Opening @${config.insta} — just paste it into our DM.`);
       window.open(`https://instagram.com/${config.insta}`, '_blank');
     }
 
