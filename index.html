@@ -307,7 +307,7 @@
     .btn-white { background: #fff; color: var(--ink); }
     .btn-sm { padding: 6px 10px; font-size: 0.8rem; }
 
-    /* Hero with 3D Perspective */
+    /* Hero with 3D Perspective & Live Drop Timer */
     .hero {
       padding: 44px 5%;
       background: radial-gradient(circle at top right, var(--cyan) 0%, transparent 35%), var(--bg);
@@ -318,6 +318,13 @@
       align-items: center;
       perspective: 1000px;
     }
+    .hero-top-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
     .hero-tag {
       display: inline-block;
       background: var(--pink);
@@ -325,8 +332,17 @@
       font-weight: 700;
       padding: 4px 12px;
       border: var(--border);
-      margin-bottom: 14px;
       transform: rotate(-1.5deg);
+    }
+    .drop-timer {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--lime);
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 5px 12px;
+      border: 2px solid var(--ink);
     }
     .hero h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); line-height: 1.02; margin-bottom: 14px; }
     .hero p { font-size: 1.05rem; max-width: 540px; margin-bottom: 22px; line-height: 1.5; }
@@ -454,9 +470,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
     }
     .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
     .card:hover .img-wrap img { transform: scale(1.04); }
+    .zoom-hint {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 2px solid var(--ink);
+      padding: 2px 7px;
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
     .badge {
       position: absolute;
       top: 10px;
@@ -500,6 +527,8 @@
       box-shadow: 4px 4px 0 var(--ink);
     }
     .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .card-title { cursor: pointer; }
+    .card-title:hover { text-decoration: underline; }
     .card-meta { font-size: 0.82rem; color: #444; font-weight: 600; margin: 6px 0 12px; }
     .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px; }
     .price { font-size: 1.2rem; font-weight: 800; }
@@ -512,6 +541,48 @@
       box-shadow: var(--shadow);
       padding: 36px 20px;
       text-align: center;
+    }
+
+    /* Social Proof / Buyer Reviews Strip */
+    .reviews-section {
+      padding: 32px 5%;
+      background: var(--bg);
+      border-top: var(--border);
+    }
+    .reviews-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .review-card {
+      background: var(--card);
+      border: var(--border);
+      box-shadow: 4px 4px 0 var(--ink);
+      padding: 16px;
+    }
+    .review-stars {
+      color: var(--pink);
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+    .review-text {
+      font-size: 0.9rem;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .review-author {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #444;
     }
 
     /* Trust Banner & Footer */
@@ -536,6 +607,10 @@
       align-items: center;
       gap: 14px;
       font-weight: 700;
+    }
+    footer a {
+      color: var(--ink);
+      text-decoration: underline;
     }
     .footer-links { display: flex; flex-wrap: wrap; gap: 14px; }
     .footer-links button { background: none; border: none; font-weight: 700; text-decoration: underline; cursor: pointer; font-family: inherit; font-size: 0.92rem; }
@@ -581,7 +656,34 @@
       font-size: 0.92rem;
       background: var(--bg);
     }
+    .field input.input-error {
+      border-color: var(--pink);
+      background: #FFF0F6;
+    }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    /* Digital Payment Transfer Details Box */
+    .pay-details-box {
+      background: var(--cyan);
+      border: 2px solid var(--ink);
+      padding: 12px;
+      margin-bottom: 12px;
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+    .pay-copy-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      border: 2px solid var(--ink);
+      padding: 6px 10px;
+      margin-top: 6px;
+      font-family: monospace;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
     .receipt-box {
       background: #111;
       color: var(--lime);
@@ -634,6 +736,28 @@
       align-items: center;
       gap: 8px;
     }
+    /* Product Quick-View Image */
+    .qv-img {
+      width: 100%;
+      max-height: 340px;
+      object-fit: cover;
+      border: 3px solid var(--ink);
+      margin-bottom: 14px;
+      background: #EAE8E1;
+    }
+    .qv-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .qv-spec-pill {
+      background: var(--bg);
+      border: 2px solid var(--ink);
+      padding: 8px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
     @media (max-width: 768px) {
       .hero { grid-template-columns: 1fr; }
     }
@@ -678,7 +802,10 @@
 
   <section class="hero">
     <div>
-      <div class="hero-tag">DROP 01 // LIVE NOW</div>
+      <div class="hero-top-pills">
+        <div class="hero-tag">DROP 01 // LIVE NOW</div>
+        <div class="drop-timer" id="dropTimer">VAULT CLOSES IN: 47H 59M 59S</div>
+      </div>
       <h1>1-OF-1 HEAT.<br>ZERO FAST FASHION.</h1>
       <p>Handpicked vintage jackets, oversized streetwear, and rare graphic pieces. Every item is washed, steamed, and measured in inches. Once someone claims it, it's gone forever.</p>
       <div class="hero-btns">
@@ -689,9 +816,9 @@
     <div class="hero-box" id="hero3dBox">
       <h3 style="margin-bottom:8px;">HOW DROPS WORK:</h3>
       <p style="font-size:0.9rem; line-height:1.5;">
-        1. Filter by category or exact inch measurements.<br>
-        2. Add to bag & generate your instant order slip.<br>
-        3. Tap WhatsApp or Copy for Insta DM to lock it in.<br>
+        1. Tap any piece to inspect full photo & inch measurements.<br>
+        2. Add to bag & get your instant Tracking ID slip.<br>
+        3. Lock on WhatsApp or Insta DM in one tap.<br>
         <strong>Pro Tip:</strong> Pay via SadaPay/Raast to save Rs. 150 + Free Delivery.
       </p>
     </div>
@@ -729,6 +856,31 @@
 
   <main class="grid" id="productGrid"></main>
 
+  <!-- BUYER REVIEWS & CURATION STANDARDS -->
+  <section class="reviews-section">
+    <div class="reviews-header">
+      <h3>WHY THRIFTERS TRUST THE RACK</h3>
+      <a href="https://instagram.com/notyourexscloset" target="_blank"><button class="btn btn-sm btn-white">FOLLOW @NOTYOUREXSCLOSET ↗</button></a>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★ • VERIFIED DROP STANDARD</div>
+        <p class="review-text">"Every jacket & hoodie is measured flat with a tape measure before listing—no guessing whether a vintage Large fits like a Medium."</p>
+        <div class="review-author">— EXACT INCH GUARANTEE</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★ • HYGIENE & PREP</div>
+        <p class="review-text">"Deep-washed, steam-sanitized, lint-rolled, and packed in clean protective mailers so your piece arrives ready to wear out of the bag."</p>
+        <div class="review-author">— READY-TO-WEAR PROMISE</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★ • FAST TRACKED DISPATCH</div>
+        <p class="review-text">"Same-day handover for orders locked before 4 PM via PostEx, Leopards, and TCS with live tracking shared straight on WhatsApp."</p>
+        <div class="review-author">— ALL-PAKISTAN SHIPPING</div>
+      </div>
+    </div>
+  </section>
+
   <section class="trust-strip">
     <div class="trust-item">
       <h4>🧼 SANITIZED & READY</h4>
@@ -749,7 +901,7 @@
   </section>
 
   <footer>
-    <div>© 2026 NOT YOUR EX'S CLOSET (@notyourexscloset)</div>
+    <div>© 2026 NOT YOUR EX'S CLOSET (<a href="https://instagram.com/notyourexscloset" target="_blank">@notyourexscloset</a>)</div>
     <div class="footer-links">
       <button onclick="viewAllProducts()">View All Products</button>
       <button onclick="openPolicy('shipping')">Shipping & COD</button>
@@ -757,6 +909,26 @@
       <button onclick="openPolicy('sizing')">How To Measure</button>
     </div>
   </footer>
+
+  <!-- PRODUCT QUICK-VIEW MODAL -->
+  <div class="overlay" id="quickViewModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="qvCode">NYEC-01</h3>
+        <button class="btn btn-sm btn-dark" onclick="closeModal('quickViewModal')">X</button>
+      </div>
+      <img id="qvImg" class="qv-img" src="" alt="Product Preview">
+      <h2 id="qvTitle" style="margin-bottom:6px;">Item Title</h2>
+      <div id="qvPrice" style="font-size:1.35rem; font-weight:800; color:var(--pink);">Rs. 0</div>
+      <div class="qv-specs">
+        <div class="qv-spec-pill"><strong>SIZE</strong><br><span id="qvSize">L</span></div>
+        <div class="qv-spec-pill"><strong>MEASUREMENTS</strong><br><span id="qvDims">24" x 28"</span></div>
+        <div class="qv-spec-pill"><strong>CONDITION</strong><br><span id="qvCond">9/10</span></div>
+      </div>
+      <p id="qvNotes" style="font-size:0.9rem; color:#333; line-height:1.5; margin-bottom:16px;"></p>
+      <div id="qvActionArea"></div>
+    </div>
+  </div>
 
   <!-- THRIFT BAG, CHECKOUT & INSTANT TRACKING CONFIRMATION MODAL -->
   <div class="overlay" id="bagModal">
@@ -773,30 +945,41 @@
         <div id="checkoutForm" style="display:none; margin-top:16px; border-top:2px solid #000; padding-top:14px;">
           <div class="grid-2">
             <div class="field">
-              <label>YOUR NAME</label>
-              <input type="text" id="custName" placeholder="e.g. Ali Raza" oninput="updateReceipt()">
+              <label>YOUR NAME *</label>
+              <input type="text" id="custName" placeholder="e.g. Ali Raza" oninput="clearError(this); updateReceipt()">
             </div>
             <div class="field">
-              <label>PHONE NUMBER</label>
-              <input type="text" id="custPhone" placeholder="03XX-XXXXXXX" oninput="updateReceipt()">
+              <label>PHONE NUMBER *</label>
+              <input type="tel" id="custPhone" placeholder="03XX-XXXXXXX" oninput="clearError(this); updateReceipt()">
             </div>
           </div>
           <div class="grid-2">
             <div class="field">
-              <label>CITY</label>
-              <input type="text" id="custCity" placeholder="e.g. Lahore / Gujranwala" oninput="updateReceipt()">
+              <label>CITY *</label>
+              <input type="text" id="custCity" placeholder="e.g. Lahore / Gujranwala" oninput="clearError(this); updateReceipt()">
             </div>
             <div class="field">
               <label>PAYMENT METHOD</label>
-              <select id="payMethod" onchange="updateReceipt()">
+              <select id="payMethod" onchange="togglePayDetails(); updateReceipt()">
                 <option value="DIGITAL">SadaPay / NayaPay / Raast (Rs. 150 OFF + Free Shipping)</option>
                 <option value="COD">Cash on Delivery (+ Rs. 200 Shipping)</option>
               </select>
             </div>
           </div>
+
+          <!-- SADAPAY / NAYAPAY / RAAST TRANSFER DETAILS BOX -->
+          <div class="pay-details-box" id="digitalPayBox">
+            <strong>⚡ INSTANT TRANSFER DETAILS (SAVE RS. 150 + FREE SHIPPING):</strong><br>
+            Transfer total to our SadaPay / NayaPay / Raast & attach screenshot in WhatsApp/DM:
+            <div class="pay-copy-row">
+              <span id="displayPayInfo">0300-1234567 (NOT YOUR EXS CLOSET)</span>
+              <button type="button" class="btn btn-sm" onclick="copyPayNumber()">COPY</button>
+            </div>
+          </div>
+
           <div class="field">
-            <label>COMPLETE DELIVERY ADDRESS</label>
-            <input type="text" id="custAddress" placeholder="House #, Street, Area" oninput="updateReceipt()">
+            <label>COMPLETE DELIVERY ADDRESS *</label>
+            <input type="text" id="custAddress" placeholder="House #, Street, Area" oninput="clearError(this); updateReceipt()">
           </div>
 
           <label style="font-weight:700; font-size:0.85rem;">LIVE ORDER SLIP (AUTO-TRACKING ID):</label>
@@ -821,6 +1004,8 @@
             <button class="btn btn-sm" onclick="copyTrackingId()">COPY ID</button>
           </div>
 
+          <div id="confirmedDigitalNote" style="background:var(--cyan); border:2px solid #000; padding:10px; font-size:0.84rem; margin-bottom:10px; text-align:left;"></div>
+
           <div class="receipt-box" id="confirmedReceiptCopy" style="text-align:left;"></div>
 
           <p style="font-size:0.84rem; margin-bottom:14px; line-height:1.45;">
@@ -842,7 +1027,7 @@
       </div>
 
       <div style="background:var(--lime); padding:10px; border:2px solid #000; margin-bottom:14px; font-size:0.85rem;">
-        <strong>Store Config:</strong> Update your WhatsApp number (format: <code>923001234567</code>) & Instagram handle so customer orders come straight to you.
+        <strong>Store & Payment Config:</strong> Update your WhatsApp number (<code>923...</code>), Instagram handle, and SadaPay/Raast account details.
       </div>
 
       <div class="grid-2">
@@ -855,7 +1040,17 @@
           <input type="text" id="cfgInsta" placeholder="notyourexscloset">
         </div>
       </div>
-      <button class="btn btn-sm btn-dark" onclick="saveConfig()" style="margin-bottom:18px;">SAVE CONTACT SETTINGS</button>
+      <div class="grid-2">
+        <div class="field">
+          <label>SADAPAY / RAAST NUMBER</label>
+          <input type="text" id="cfgPayNumber" placeholder="0300-1234567">
+        </div>
+        <div class="field">
+          <label>ACCOUNT TITLE</label>
+          <input type="text" id="cfgPayTitle" placeholder="NOT YOUR EXS CLOSET">
+        </div>
+      </div>
+      <button class="btn btn-sm btn-dark" onclick="saveConfig()" style="margin-bottom:18px;">SAVE CONTACT & PAYMENT SETTINGS</button>
 
       <h4 style="border-top:2px solid #000; padding-top:12px; margin-bottom:10px;">+ ADD NEW 1-OF-1 ITEM</h4>
       <div class="grid-2">
@@ -881,6 +1076,7 @@
         <div class="field"><label>INCHES (CHEST x LENGTH)</label><input type="text" id="newDims" placeholder='23" x 28"'></div>
         <div class="field"><label>CONDITION</label><input type="text" id="newCond" placeholder="9.5/10"></div>
       </div>
+      <div class="field"><label>FIT / CONDITION NOTES</label><input type="text" id="newNotes" placeholder="Heavyweight cotton, zero stains, washed & steamed."></div>
       <div class="field"><label>IMAGE URL (OR LEAVE BLANK)</label><input type="text" id="newImg" placeholder="https://..."></div>
       <button class="btn" onclick="addNewItem()" style="width:100%; margin-bottom:18px;">+ PUBLISH TO RACK</button>
 
@@ -921,6 +1117,20 @@
       introStage.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
     });
 
+    /* Live Drop Countdown Timer */
+    function startDropTimer() {
+      let secondsLeft = 47 * 3600 + 42 * 60 + 18;
+      setInterval(() => {
+        if (secondsLeft <= 0) return;
+        secondsLeft--;
+        const h = String(Math.floor(secondsLeft / 3600)).padStart(2, '0');
+        const m = String(Math.floor((secondsLeft % 3600) / 60)).padStart(2, '0');
+        const s = String(secondsLeft % 60).padStart(2, '0');
+        document.getElementById('dropTimer').textContent = `DROP 01 ENDS IN: ${h}H ${m}M ${s}S`;
+      }, 1000);
+    }
+    startDropTimer();
+
     function bind3DTilt() {
       const targets = document.querySelectorAll('.card, #hero3dBox');
       targets.forEach(el => {
@@ -937,12 +1147,12 @@
     }
 
     const defaultItems = [
-      { id: "NYEC-01", title: "90s Faded Carhartt Work Jacket", category: "JACKETS", size: "L", dims: '24" x 28"', cond: "9/10", price: 3200, sold: false, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" },
-      { id: "NYEC-02", title: "Boxy Washed Charcoal Hoodie", category: "HOODIES", size: "M", dims: '22" x 26"', cond: "9.5/10", price: 2100, sold: false, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" },
-      { id: "NYEC-03", title: "Y2K Baggy Light-Wash Denim", category: "BOTTOMS", size: "L", dims: '34" Waist x 41" L', cond: "9/10", price: 2500, sold: false, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80" },
-      { id: "NYEC-04", title: "Vintage Racing Graphic Tee", category: "TEES", size: "XL", dims: '25" x 30"', cond: "8.5/10", price: 1450, sold: false, img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=600&q=80" },
-      { id: "NYEC-05", title: "Retro Colorblock Windbreaker", category: "JACKETS", size: "M", dims: '22.5" x 27"', cond: "9.5/10", price: 2300, sold: true, img: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=600&q=80" },
-      { id: "NYEC-06", title: "Heavyweight Flannel Overshirt", category: "TEES", size: "S", dims: '20.5" x 26"', cond: "9/10", price: 1750, sold: false, img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80" }
+      { id: "NYEC-01", title: "90s Faded Carhartt Work Jacket", category: "JACKETS", size: "L", dims: '24" x 28"', cond: "9/10", notes: "Heavy canvas shell with natural vintage fade. Zippers smooth, zero holes, sanitized & steamed.", price: 3200, sold: false, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-02", title: "Boxy Washed Charcoal Hoodie", category: "HOODIES", size: "M", dims: '22" x 26"', cond: "9.5/10", notes: "Thick 420gsm fleece with drop-shoulder boxy cut. Deep-washed & lint-free.", price: 2100, sold: false, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-03", title: "Y2K Baggy Light-Wash Denim", category: "BOTTOMS", size: "L", dims: '34" Waist x 41" L', cond: "9/10", notes: "Wide-leg skate stack fit with clean heel hems and original hardware.", price: 2500, sold: false, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-04", title: "Vintage Racing Graphic Tee", category: "TEES", size: "XL", dims: '25" x 30"', cond: "8.5/10", notes: "Single-stitch collar, cracked vintage chest print, oversized streetwear drape.", price: 1450, sold: false, img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-05", title: "Retro Colorblock Windbreaker", category: "JACKETS", size: "M", dims: '22.5" x 27"', cond: "9.5/10", notes: "Lightweight mesh-lined 90s shell with elastic cuffs and crisp colorblocking.", price: 2300, sold: true, img: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=600&q=80" },
+      { id: "NYEC-06", title: "Heavyweight Flannel Overshirt", category: "TEES", size: "S", dims: '20.5" x 26"', cond: "9/10", notes: "Brushed cotton flannel ideal for layering over tees or hoodies.", price: 1750, sold: false, img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80" }
     ];
 
     const categoriesList = [
@@ -953,8 +1163,13 @@
       { key: "BOTTOMS", label: "BOTTOMS" }
     ];
 
-    let items = JSON.parse(localStorage.getItem('nyec_items_v2')) || defaultItems;
-    let config = JSON.parse(localStorage.getItem('nyec_cfg')) || { whatsapp: "923001234567", insta: "notyourexscloset" };
+    let items = JSON.parse(localStorage.getItem('nyec_items_v3')) || defaultItems;
+    let config = JSON.parse(localStorage.getItem('nyec_cfg_v2')) || {
+      whatsapp: "923001234567",
+      insta: "notyourexscloset",
+      payNumber: "0300-1234567",
+      payTitle: "NOT YOUR EXS CLOSET"
+    };
     let bag = [];
     let activeCategory = 'ALL';
     let activeSize = 'ALL';
@@ -967,7 +1182,7 @@
     }
 
     function saveData() {
-      localStorage.setItem('nyec_items_v2', JSON.stringify(items));
+      localStorage.setItem('nyec_items_v3', JSON.stringify(items));
     }
 
     function renderCategoryTabs() {
@@ -1039,16 +1254,17 @@
 
       grid.innerHTML = filtered.map(item => `
         <div class="card ${item.sold ? 'sold-card' : ''}">
-          <div class="img-wrap">
+          <div class="img-wrap" onclick="openQuickView('${item.id}')">
             <img src="${item.img}" alt="${item.title}" onerror="this.src='https://placehold.co/600x600/0E0E0E/CCFF00?text=1-OF-1+DROP'">
             <div class="badge">${item.id} • SIZE ${item.size}</div>
             <div class="badge-cat">${item.category}</div>
+            <div class="zoom-hint">🔍 INSPECT</div>
             <div class="badge-cond">COND ${item.cond}</div>
             ${item.sold ? '<div class="sold-stamp">SOLD OUT</div>' : ''}
           </div>
           <div class="card-body">
             <div>
-              <h3>${item.title}</h3>
+              <h3 class="card-title" onclick="openQuickView('${item.id}')">${item.title}</h3>
               <div class="card-meta">Measurements: ${item.dims}</div>
             </div>
             <div class="price-row">
@@ -1062,6 +1278,28 @@
       `).join('');
 
       bind3DTilt();
+    }
+
+    /* Product Quick-View Modal */
+    function openQuickView(id) {
+      const item = items.find(i => i.id === id);
+      if (!item) return;
+      document.getElementById('qvCode').textContent = `${item.id} // ${item.category}`;
+      document.getElementById('qvImg').src = item.img;
+      document.getElementById('qvTitle').textContent = item.title;
+      document.getElementById('qvPrice').textContent = `Rs. ${item.price.toLocaleString()}`;
+      document.getElementById('qvSize').textContent = item.size;
+      document.getElementById('qvDims').textContent = item.dims;
+      document.getElementById('qvCond').textContent = item.cond;
+      document.getElementById('qvNotes').textContent = item.notes || "1-of-1 curated vintage piece. Washed, steamed, and measured flat in inches.";
+
+      const actionArea = document.getElementById('qvActionArea');
+      if (item.sold) {
+        actionArea.innerHTML = `<button class="btn btn-dark" style="width:100%;" disabled>ALREADY CLAIMED (1-OF-1 SOLD OUT)</button>`;
+      } else {
+        actionArea.innerHTML = `<button class="btn" style="width:100%;" onclick="closeModal('quickViewModal'); addToBag('${item.id}')">+ CLAIM THIS 1-OF-1 PIECE</button>`;
+      }
+      openModal('quickViewModal');
     }
 
     function setSize(size, el) {
@@ -1083,8 +1321,20 @@
       document.getElementById('bagModalTitle').textContent = "YOUR THRIFT BAG";
       document.getElementById('bagCheckoutView').style.display = "block";
       document.getElementById('orderConfirmedView').style.display = "none";
+      document.getElementById('displayPayInfo').textContent = `${config.payNumber} (${config.payTitle})`;
+      togglePayDetails();
       updateBagUI();
       openModal('bagModal');
+    }
+
+    function togglePayDetails() {
+      const isDigital = document.getElementById('payMethod').value === 'DIGITAL';
+      document.getElementById('digitalPayBox').style.display = isDigital ? 'block' : 'none';
+    }
+
+    function copyPayNumber() {
+      navigator.clipboard.writeText(config.payNumber);
+      alert(`Account number ${config.payNumber} (${config.payTitle}) copied!`);
     }
 
     function addToBag(id) {
@@ -1126,6 +1376,38 @@
       updateReceipt();
     }
 
+    function clearError(el) {
+      el.classList.remove('input-error');
+    }
+
+    function validateCheckoutForm() {
+      const nameEl = document.getElementById('custName');
+      const phoneEl = document.getElementById('custPhone');
+      const cityEl = document.getElementById('custCity');
+      const addrEl = document.getElementById('custAddress');
+
+      let valid = true;
+      [nameEl, phoneEl, cityEl, addrEl].forEach(el => {
+        if (!el.value.trim()) {
+          el.classList.add('input-error');
+          valid = false;
+        }
+      });
+
+      const digitsOnly = phoneEl.value.replace(/\D/g, '');
+      if (digitsOnly.length < 10) {
+        phoneEl.classList.add('input-error');
+        alert("Please enter a valid 11-digit Pakistani mobile number (e.g. 0300-1234567).");
+        return false;
+      }
+
+      if (!valid) {
+        alert("Please fill in your Name, Phone, City, and Delivery Address so we can dispatch your parcel.");
+        return false;
+      }
+      return true;
+    }
+
     function getOrderSummary() {
       const subtotal = bag.reduce((sum, i) => sum + i.price, 0);
       const isDigital = document.getElementById('payMethod').value === 'DIGITAL';
@@ -1133,10 +1415,10 @@
       const shipping = isDigital ? 0 : 200;
       const total = subtotal - discount + shipping;
 
-      const name = document.getElementById('custName').value || '[Your Name]';
-      const phone = document.getElementById('custPhone').value || '[Phone]';
-      const city = document.getElementById('custCity').value || '[City]';
-      const addr = document.getElementById('custAddress').value || '[Address]';
+      const name = document.getElementById('custName').value.trim() || '[Your Name]';
+      const phone = document.getElementById('custPhone').value.trim() || '[Phone]';
+      const city = document.getElementById('custCity').value.trim() || '[City]';
+      const addr = document.getElementById('custAddress').value.trim() || '[Address]';
       const itemLines = bag.map(i => `- ${i.id}: ${i.title} (${i.size}) — Rs. ${i.price}`).join('\n');
 
       return `HEY NOT YOUR EX'S CLOSET! I WANT TO LOCK THIS ORDER:\nTracking ID: ${currentTrackingId}\n\n${itemLines}\n\nSubtotal: Rs. ${subtotal}\n${isDigital ? 'Digital Pay Discount: -Rs. 150\nShipping: FREE' : 'COD Shipping: +Rs. 200'}\nTOTAL PAYABLE: Rs. ${total}\nPayment: ${isDigital ? 'SadaPay / NayaPay / Raast' : 'Cash on Delivery (COD)'}\n\nName: ${name}\nPhone: ${phone}\nCity: ${city}\nAddress: ${addr}`;
@@ -1146,12 +1428,20 @@
       document.getElementById('receiptPreview').textContent = getOrderSummary();
     }
 
-    function showCustomerConfirmation(finalSlip, trkId) {
+    function showCustomerConfirmation(finalSlip, trkId, isDigital) {
       document.getElementById('bagModalTitle').textContent = "CONFIRMATION & TRACKING";
       document.getElementById('bagCheckoutView').style.display = "none";
       document.getElementById('orderConfirmedView').style.display = "block";
       document.getElementById('confirmedTrackingId').textContent = trkId;
       document.getElementById('confirmedReceiptCopy').textContent = finalSlip;
+
+      const noteBox = document.getElementById('confirmedDigitalNote');
+      if (isDigital) {
+        noteBox.style.display = "block";
+        noteBox.innerHTML = `<strong>⚡ DIGITAL TRANSFER REMINDER:</strong> Send total to <strong>${config.payNumber}</strong> (<em>${config.payTitle}</em>) and drop the payment screenshot in our WhatsApp / Insta DM with Tracking ID <strong>${trkId}</strong>.`;
+      } else {
+        noteBox.style.display = "none";
+      }
     }
 
     function copyTrackingId() {
@@ -1172,20 +1462,24 @@
     }
 
     function sendWhatsApp() {
+      if (!validateCheckoutForm()) return;
+      const isDigital = document.getElementById('payMethod').value === 'DIGITAL';
       const slip = getOrderSummary();
       const trk = currentTrackingId;
       const text = encodeURIComponent(slip);
       markBagSold();
-      showCustomerConfirmation(slip, trk);
+      showCustomerConfirmation(slip, trk, isDigital);
       window.open(`https://wa.me/${config.whatsapp}?text=${text}`, '_blank');
     }
 
     function copyInstaDM() {
+      if (!validateCheckoutForm()) return;
+      const isDigital = document.getElementById('payMethod').value === 'DIGITAL';
       const slip = getOrderSummary();
       const trk = currentTrackingId;
       navigator.clipboard.writeText(slip);
       markBagSold();
-      showCustomerConfirmation(slip, trk);
+      showCustomerConfirmation(slip, trk, isDigital);
       alert(`Order slip & Tracking ID (${trk}) copied! Opening @${config.insta} — just paste it into our DM.`);
       window.open(`https://instagram.com/${config.insta}`, '_blank');
     }
@@ -1199,6 +1493,8 @@
       }
       document.getElementById('cfgWhatsapp').value = config.whatsapp;
       document.getElementById('cfgInsta').value = config.insta;
+      document.getElementById('cfgPayNumber').value = config.payNumber;
+      document.getElementById('cfgPayTitle').value = config.payTitle;
       renderAdminList();
       openModal('adminModal');
     }
@@ -1206,8 +1502,10 @@
     function saveConfig() {
       config.whatsapp = document.getElementById('cfgWhatsapp').value.trim();
       config.insta = document.getElementById('cfgInsta').value.trim();
-      localStorage.setItem('nyec_cfg', JSON.stringify(config));
-      alert("WhatsApp & Instagram settings saved!");
+      config.payNumber = document.getElementById('cfgPayNumber').value.trim();
+      config.payTitle = document.getElementById('cfgPayTitle').value.trim();
+      localStorage.setItem('nyec_cfg_v2', JSON.stringify(config));
+      alert("WhatsApp, Instagram & SadaPay/Raast settings saved!");
     }
 
     function addNewItem() {
@@ -1217,6 +1515,7 @@
       const size = document.getElementById('newSize').value;
       const dims = document.getElementById('newDims').value.trim() || '22" x 27"';
       const cond = document.getElementById('newCond').value.trim() || '9/10';
+      const notes = document.getElementById('newNotes').value.trim() || '1-of-1 curated vintage piece. Washed, steamed, and measured flat in inches.';
       const img = document.getElementById('newImg').value.trim() || 'https://placehold.co/600x600/0E0E0E/CCFF00?text=NEW+DROP';
 
       if (!title || !price) {
@@ -1225,13 +1524,14 @@
       }
 
       const nextNum = String(items.length + 1).padStart(2, '0');
-      items.unshift({ id: `NYEC-${nextNum}`, title, category, size, dims, cond, price, sold: false, img });
+      items.unshift({ id: `NYEC-${nextNum}`, title, category, size, dims, cond, notes, price, sold: false, img });
       saveData();
       renderCategoryTabs();
       renderGrid();
       renderAdminList();
       document.getElementById('newTitle').value = '';
       document.getElementById('newPrice').value = '';
+      document.getElementById('newNotes').value = '';
       document.getElementById('newImg').value = '';
       alert("Item published to the rack!");
     }
