@@ -28,7 +28,6 @@
     body.locked-scroll { overflow: hidden; height: 100vh; }
     h1, h2, h3, .brand { font-family: 'Syne', sans-serif; }
 
-    /* RAINBOW GRADIENT ACCENTS */
     .rainbow-text {
       background: linear-gradient(90deg, #FF3366, #FF9900, #33CC66, #3399FF, #9933FF);
       -webkit-background-clip: text;
@@ -39,13 +38,13 @@
        3D FULL-SCREEN ENTRY LANDING PAGE
     ========================================= */
     #intro3d {
-      position: fixed; inset: 0; z-index: 9999;
+      position: fixed; inset: 0; z-index: 99999;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       perspective: 1200px; overflow: hidden; pointer-events: all;
     }
     #intro3d.done { pointer-events: none; }
     .vault-door {
-      position: absolute; top: 0; width: 50.5%; height: 100%;
+      position: absolute; top: 0; width: 51%; height: 100%;
       background: linear-gradient(135deg, #A7D8FF 0%, #C4F0C5 50%, #FFD6E0 100%);
       background-image: radial-gradient(rgba(31, 41, 55, 0.08) 1px, transparent 1px);
       background-size: 24px 24px; transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1;
@@ -65,9 +64,9 @@
 
     /* POPPING GIF CONTAINER */
     .pop-gif-wrap {
-      width: 180px; height: 130px; margin-bottom: 20px;
-      border: 3px solid #1F2937; border-radius: 16px; overflow: hidden;
-      box-shadow: 6px 6px 0px #1F2937; background: #FFFFFF;
+      width: 150px; height: 110px; margin-bottom: 16px;
+      border: 3px solid #1F2937; border-radius: 12px; overflow: hidden;
+      box-shadow: 5px 5px 0px #1F2937; background: #FFFFFF;
       animation: popGifBounce 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards, floatGif 4s ease-in-out 1.2s infinite;
     }
     .pop-gif-wrap img { width: 100%; height: 100%; object-fit: cover; }
@@ -79,26 +78,26 @@
     }
     @keyframes floatGif {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(2deg); }
+      50% { transform: translateY(-6px) rotate(2deg); }
     }
 
-    .scene-3d { width: 90px; height: 90px; perspective: 750px; margin-bottom: 20px; }
+    .scene-3d { width: 80px; height: 80px; perspective: 750px; margin-bottom: 16px; }
     .cube-3d {
       width: 100%; height: 100%; position: relative; transform-style: preserve-3d;
       animation: cubeEntrance 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards, cubeIdleFloat 7s linear 1.4s infinite;
     }
     .cube-face {
-      position: absolute; width: 90px; height: 90px; border: 3px solid #1F2937;
+      position: absolute; width: 80px; height: 80px; border: 3px solid #1F2937;
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.9rem;
       box-shadow: inset 0 0 15px rgba(0,0,0,0.15); backface-visibility: visible;
     }
-    .face-front  { background: #FF6B8B; color: #FFFFFF; transform: rotateY(0deg) translateZ(45px); }
-    .face-back   { background: #FFD166; color: #1F2937; transform: rotateY(180deg) translateZ(45px); }
-    .face-right  { background: #06D6A0; color: #1F2937; transform: rotateY(90deg) translateZ(45px); }
-    .face-left   { background: #118AB2; color: #FFFFFF; transform: rotateY(-90deg) translateZ(45px); }
-    .face-top    { background: #073B4C; color: #FFFFFF; transform: rotateX(90deg) translateZ(45px); }
-    .face-bottom { background: #FF9F1C; color: #FFFFFF; transform: rotateX(-90deg) translateZ(45px); }
+    .face-front  { background: #FF6B8B; color: #FFFFFF; transform: rotateY(0deg) translateZ(40px); }
+    .face-back   { background: #FFD166; color: #1F2937; transform: rotateY(180deg) translateZ(40px); }
+    .face-right  { background: #06D6A0; color: #1F2937; transform: rotateY(90deg) translateZ(40px); }
+    .face-left   { background: #118AB2; color: #FFFFFF; transform: rotateY(-90deg) translateZ(40px); }
+    .face-top    { background: #073B4C; color: #FFFFFF; transform: rotateX(90deg) translateZ(40px); }
+    .face-bottom { background: #FF9F1C; color: #FFFFFF; transform: rotateX(-90deg) translateZ(40px); }
 
     @keyframes cubeEntrance {
       0%   { transform: scale(0.15) rotateX(-180deg) rotateY(-270deg) rotateZ(45deg); }
@@ -114,12 +113,12 @@
     .brand-3d-wrap { perspective: 950px; margin-bottom: 12px; }
     .intro-title-3d {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(1.5rem, 4.5vw, 2.8rem);
+      font-size: clamp(1.4rem, 4vw, 2.6rem);
       font-weight: 800;
       color: #1F2937;
       letter-spacing: 1.5px;
       line-height: 1.1;
-      padding: 14px 26px;
+      padding: 12px 24px;
       background: #FFFFFF;
       border: 3px solid #1F2937;
       transform-style: preserve-3d;
@@ -136,15 +135,15 @@
     }
 
     .intro-sub {
-      color: #4B5563; font-size: clamp(0.78rem, 2vw, 0.92rem); font-weight: 700;
-      letter-spacing: 2px; margin-bottom: 24px; opacity: 0; animation: fadeUpElem 0.65s ease 0.8s forwards;
+      color: #4B5563; font-size: clamp(0.75rem, 1.8vw, 0.9rem); font-weight: 700;
+      letter-spacing: 2px; margin-bottom: 22px; opacity: 0; animation: fadeUpElem 0.65s ease 0.8s forwards;
       font-family: 'JetBrains Mono', monospace;
     }
 
     .shop-now-3d {
       background: linear-gradient(90deg, #FF6B8B, #FFD166, #06D6A0, #118AB2);
-      color: #1F2937; border: 3px solid #1F2937; padding: 15px 36px;
-      font-family: 'Syne', sans-serif; font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 800;
+      color: #1F2937; border: 3px solid #1F2937; padding: 14px 34px;
+      font-family: 'Syne', sans-serif; font-size: clamp(1rem, 2.2vw, 1.15rem); font-weight: 800;
       letter-spacing: 1px; cursor: pointer; box-shadow: 5px 5px 0px #1F2937;
       opacity: 0; transform: translateY(18px); animation: fadeUpElem 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1.05s forwards;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -181,7 +180,7 @@
     }
     .nav-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 
-    /* Buttons (Rainbow Vibe) */
+    /* Buttons */
     .btn {
       background: #1F2937; color: #FFFFFF; border: 3px solid #1F2937; padding: 10px 18px;
       font-family: 'Space Grotesk', sans-serif; font-weight: 700; cursor: pointer; box-shadow: 3px 3px 0 #118AB2;
@@ -396,14 +395,14 @@
 </head>
 <body class="locked-scroll">
 
-  <!-- 3D VAULT ENTRY WITH POPPING GIF & BRAND NAME -->
+  <!-- 3D VAULT ENTRY WITH WORKING POPPING GIF & BRAND NAME -->
   <div id="intro3d">
     <div class="vault-door vault-left"></div>
     <div class="vault-door vault-right"></div>
     <div class="intro-stage" id="introStage">
-      <!-- POPPING GIF FROM USER -->
+      <!-- RELIABLE DIRECT GIF EMBED -->
       <div class="pop-gif-wrap">
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHc3ZXF6bzRjdGJqZGNjdnZ3ZDF4d3B2ZXpqN3h5ajNreHR6ZmdjYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LqjiBvd0aL4Q8/giphy.gif" alt="Happy Unicorn Hamster" onerror="this.src='https://placehold.co/180x130/FFD166/1F2937?text=UNICORN+HAMSTER'">
+        <img src="https://media.giphy.com/media/LqjiBvd0aL4Q8/giphy.gif" alt="Happy Unicorn Hamster">
       </div>
       <div class="scene-3d">
         <div class="cube-3d">
@@ -784,9 +783,9 @@
       { key: "BOTTOMS", label: "BOTTOMS" }
     ];
 
-    let items = JSON.parse(localStorage.getItem('nyec_items_v10')) || defaultItems;
-    let reviews = JSON.parse(localStorage.getItem('nyec_reviews_v8')) || defaultReviews;
-    let config = JSON.parse(localStorage.getItem('nyec_cfg_v10')) || {
+    let items = JSON.parse(localStorage.getItem('nyec_items_v11')) || defaultItems;
+    let reviews = JSON.parse(localStorage.getItem('nyec_reviews_v9')) || defaultReviews;
+    let config = JSON.parse(localStorage.getItem('nyec_cfg_v11')) || {
       whatsapp: "923167271822",
       insta: "notyo._.urexscloset",
       payNumber: "03167271822",
@@ -804,8 +803,8 @@
       return `NYEC-TRK-${rand}`;
     }
 
-    function saveData() { localStorage.setItem('nyec_items_v10', JSON.stringify(items)); }
-    function saveReviews() { localStorage.setItem('nyec_reviews_v8', JSON.stringify(reviews)); }
+    function saveData() { localStorage.setItem('nyec_items_v11', JSON.stringify(items)); }
+    function saveReviews() { localStorage.setItem('nyec_reviews_v9', JSON.stringify(reviews)); }
 
     function renderCategoryTabs() {
       document.getElementById('totalHeroCount').textContent = items.length;
@@ -1178,7 +1177,7 @@
       config.insta = document.getElementById('cfgInsta').value.trim();
       config.payNumber = document.getElementById('cfgPayNumber').value.trim();
       config.payTitle = document.getElementById('cfgPayTitle').value.trim();
-      localStorage.setItem('nyec_cfg_v10', JSON.stringify(config));
+      localStorage.setItem('nyec_cfg_v11', JSON.stringify(config));
       alert("Settings saved successfully!");
     }
 
