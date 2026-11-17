@@ -267,7 +267,7 @@
     .empty-state { grid-column: 1 / -1; background: var(--card-bg); border: var(--border); box-shadow: var(--shadow); padding: 40px 20px; text-align: center; }
 
     /* =========================================
-       COMMUNITY REVIEWS SECTION & SUBMISSION
+       COMMUNITY REVIEWS SECTION
     ========================================= */
     .reviews-section {
       padding: 40px 5%;
@@ -292,11 +292,6 @@
     .review-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #222; padding-top: 10px; font-size: 0.78rem; font-family: monospace; }
     .review-author { font-weight: 800; color: var(--cyan); }
     .review-date { color: #666; }
-
-    /* Review Form Modal */
-    .review-form-box {
-      background: var(--card-bg); border: 3px solid var(--cyan); box-shadow: 8px 8px 0 var(--lime); padding: 24px; margin-top: 30px;
-    }
 
     /* Reference-Inspired Quick View (PDP) */
     .modal-overlay {
@@ -431,6 +426,7 @@
     <div class="brand" onclick="viewAllProducts()">NOT YOUR EX'S CLOSET</div>
     <div class="nav-actions">
       <button class="btn btn-cyan btn-sm" onclick="viewAllProducts()">VIEW ALL PRODUCTS</button>
+      <a href="https://instagram.com/notyo._.urexscloset" target="_blank"><button class="btn btn-white btn-sm">INSTAGRAM ↗</button></a>
       <button class="btn btn-pink" onclick="openBagModal()">THRIFT BAG (<span id="bagCount">0</span>)</button>
     </div>
   </header>
@@ -490,15 +486,13 @@
 
   <main class="grid" id="productGrid"></main>
 
-  <!-- COMMUNITY REVIEWS SECTION (REAL USER SUBMISSIONS) -->
+  <!-- COMMUNITY REVIEWS SECTION -->
   <section class="reviews-section" id="reviewsSection">
     <div class="reviews-header">
       <h3>COMMUNITY REVIEWS & DROP FEEDBACK</h3>
       <button class="btn btn-sm btn-cyan" onclick="openReviewModal()">+ DROP A REVIEW</button>
     </div>
-    <div class="reviews-grid" id="communityReviewsGrid">
-      <!-- Dynamically populated real reviews -->
-    </div>
+    <div class="reviews-grid" id="communityReviewsGrid"></div>
   </section>
 
   <!-- TRUST STRIP -->
@@ -525,6 +519,7 @@
     <div>© 2026 NOT YOUR EX'S CLOSET (<a href="https://instagram.com/notyo._.urexscloset" target="_blank">@notyo._.urexscloset</a>)</div>
     <div class="footer-links">
       <button onclick="viewAllProducts()">View All Products</button>
+      <a href="https://instagram.com/notyo._.urexscloset" target="_blank" style="color:#000; font-weight:800; text-decoration:underline;">Follow Instagram ↗</a>
       <button onclick="openPolicy('shipping')">Shipping & COD</button>
       <button onclick="openPolicy('returns')">No-Drama Return Policy</button>
       <button onclick="openPolicy('sizing')">How To Measure</button>
@@ -558,7 +553,7 @@
     </div>
   </div>
 
-  <!-- REFERENCE-INSPIRED QUICK VIEW (HANGER / OUTFITTERS STYLE PDP) -->
+  <!-- PDP MODAL -->
   <div class="modal-overlay" id="quickViewModal">
     <div class="pdp-modal">
       <div class="modal-header">
@@ -569,7 +564,7 @@
         <div class="pdp-gallery">
           <div class="pdp-thumbs" id="pdpThumbnails"></div>
           <div class="pdp-main-img-wrap">
-            <img id="pdpMainImg" class="pdp-main-img" src="" alt="Product View">
+            <img id="pdpMainImg" class="pdp-main-img" src="" alt="Product View" onerror="this.src='https://placehold.co/600x600/0E0E0E/CCFF00?text=NYEC+ARCHIVE'">
           </div>
         </div>
         <div class="pdp-info">
@@ -636,7 +631,7 @@
           <div class="receipt-box" id="receiptPreview"></div>
           <div style="display:flex; flex-direction:column; gap:10px;">
             <button class="btn" onclick="sendWhatsApp()">📲 LOCK ORDER ON WHATSAPP</button>
-            <button class="btn btn-pink" onclick="copyInstaDM()">📋 COPY SLIP FOR INSTAGRAM DM</button>
+            <a id="instaDmLink" href="https://instagram.com/notyo._.urexscloset" target="_blank" style="text-decoration:none;"><button class="btn btn-pink" style="width:100%;" onclick="copyInstaDM()">📋 COPY SLIP FOR INSTAGRAM DM</button></a>
           </div>
         </div>
       </div>
@@ -652,7 +647,7 @@
           <div id="confirmedDigitalNote" style="background:rgba(0,229,255,0.1); border:2px solid var(--cyan); padding:10px; font-size:0.84rem; margin-bottom:10px; text-align:left; color:#ccc;"></div>
           <div class="receipt-box" id="confirmedReceiptCopy" style="text-align:left;"></div>
           <p style="font-size:0.84rem; color:#bbb; margin-bottom:14px; line-height:1.45;">
-            <strong>Next Step:</strong> Make sure you hit <strong>Send</strong> in WhatsApp (or paste in Insta DM) so our team dispatches your parcel within 24 hours via PostEx / Leopards / TCS.
+            <strong>Next Step:</strong> Make sure you hit <strong>Send</strong> in WhatsApp (or paste in Insta DM @notyo._.urexscloset) so our team dispatches your parcel within 24 hours via PostEx / Leopards / TCS.
           </p>
           <button class="btn btn-cyan" style="width:100%;" onclick="closeModal('bagModal')">CONTINUE BROWSING RACK</button>
         </div>
@@ -668,17 +663,17 @@
         <button class="btn btn-sm btn-dark" onclick="closeModal('adminModal')">X</button>
       </div>
       <div style="background:var(--lime); color:#000; padding:10px; border:2px solid #000; margin-bottom:14px; font-size:0.85rem; font-weight:700;">
-        <strong>Store & Payment Config:</strong> Update your WhatsApp number (<code>923...</code>), Instagram handle, and SadaPay/Raast account details.
+        <strong>Store & Payment Config:</strong> WhatsApp is locked to <code>03167271822</code> and Instagram to <code>notyo._.urexscloset</code>.
       </div>
       <div class="grid-2">
-        <div class="field"><label>YOUR WHATSAPP (WITH 92)</label><input type="text" id="cfgWhatsapp" placeholder="923001234567"></div>
-        <div class="field"><label>INSTAGRAM USERNAME</label><input type="text" id="cfgInsta" placeholder="notyo._.urexscloset"></div>
+        <div class="field"><label>WHATSAPP (LOCKED)</label><input type="text" id="cfgWhatsapp" value="923167271822"></div>
+        <div class="field"><label>INSTAGRAM HANDLE</label><input type="text" id="cfgInsta" value="notyo._.urexscloset"></div>
       </div>
       <div class="grid-2">
-        <div class="field"><label>SADAPAY / RAAST NUMBER</label><input type="text" id="cfgPayNumber" placeholder="0300-1234567"></div>
+        <div class="field"><label>SADAPAY / RAAST NUMBER</label><input type="text" id="cfgPayNumber" placeholder="03167271822"></div>
         <div class="field"><label>ACCOUNT TITLE</label><input type="text" id="cfgPayTitle" placeholder="NOT YOUR EXS CLOSET"></div>
       </div>
-      <button class="btn btn-sm btn-dark" onclick="saveConfig()" style="margin-bottom:18px; width:100%;">SAVE CONTACT & PAYMENT SETTINGS</button>
+      <button class="btn btn-sm btn-dark" onclick="saveConfig()" style="margin-bottom:18px; width:100%;">SAVE SETTINGS</button>
       <h4 style="border-top:2px solid #333; padding-top:12px; margin-bottom:10px; color:var(--lime);">+ ADD NEW 1-OF-1 ITEM</h4>
       <div class="grid-2">
         <div class="field"><label>ITEM TITLE</label><input type="text" id="newTitle" placeholder="Vintage Nike Windbreaker"></div>
@@ -783,10 +778,10 @@
 
     let items = JSON.parse(localStorage.getItem('nyec_items_v3')) || defaultItems;
     let reviews = JSON.parse(localStorage.getItem('nyec_reviews_v1')) || defaultReviews;
-    let config = JSON.parse(localStorage.getItem('nyec_cfg_v2')) || {
-      whatsapp: "923001234567",
+    let config = JSON.parse(localStorage.getItem('nyec_cfg_v3')) || {
+      whatsapp: "923167271822",
       insta: "notyo._.urexscloset",
-      payNumber: "0300-1234567",
+      payNumber: "03167271822",
       payTitle: "NOT YOUR EXS CLOSET"
     };
     let bag = [];
@@ -889,7 +884,6 @@
       `).join('');
     }
 
-    /* Render Community Reviews */
     function renderReviews() {
       const container = document.getElementById('communityReviewsGrid');
       container.innerHTML = reviews.map(r => `
@@ -913,8 +907,8 @@
       const stars = document.getElementById('reviewRating').value;
       const text = document.getElementById('reviewText').value.trim();
 
-      if (!author || !text) {
-        alert("Please enter your name/handle and review comments.");
+      if (!author || text.length < 5) {
+        alert("Please enter your name/handle and a meaningful review (at least 5 characters).");
         return;
       }
 
@@ -934,7 +928,6 @@
       alert("Thank you! Your honest review has been added to the community wall.");
     }
 
-    /* PDP Quick View */
     function openQuickView(id) {
       const item = items.find(i => i.id === id);
       if (!item) return;
@@ -955,7 +948,7 @@
       
       const thumbsContainer = document.getElementById('pdpThumbnails');
       thumbsContainer.innerHTML = gallery.map((imgUrl, idx) => `
-        <img class="pdp-thumb ${idx === 0 ? 'active' : ''}" src="${imgUrl}" onclick="switchPdpImage('${imgUrl}', this)">
+        <img class="pdp-thumb ${idx === 0 ? 'active' : ''}" src="${imgUrl}" onerror="this.src='https://placehold.co/600x600/0E0E0E/CCFF00?text=NYEC'" onclick="switchPdpImage('${imgUrl}', this)">
       `).join('');
 
       const sizes = ['S', 'M', 'L', 'XL'];
@@ -1075,7 +1068,7 @@
       const digitsOnly = phoneEl.value.replace(/\D/g, '');
       if (digitsOnly.length < 10) {
         phoneEl.classList.add('input-error');
-        alert("Please enter a valid 11-digit Pakistani mobile number (e.g. 0300-1234567).");
+        alert("Please enter a valid 11-digit Pakistani mobile number (e.g. 0316-7271822).");
         return false;
       }
 
@@ -1145,7 +1138,7 @@
       const text = encodeURIComponent(slip);
       markBagSold();
       showCustomerConfirmation(slip, trk, isDigital);
-      window.open(`https://wa.me/${config.whatsapp}?text=${text}`, '_blank');
+      window.open(`https://api.whatsapp.com/send?phone=${config.whatsapp}&text=${text}`, '_blank');
     }
 
     function copyInstaDM() {
@@ -1157,7 +1150,6 @@
       markBagSold();
       showCustomerConfirmation(slip, trk, isDigital);
       alert(`Order slip & Tracking ID (${trk}) copied! Opening @${config.insta} — just paste it into our DM.`);
-      window.open(`https://instagram.com/${config.insta}`, '_blank');
     }
 
     /* Admin Panel */
@@ -1178,8 +1170,8 @@
       config.insta = document.getElementById('cfgInsta').value.trim();
       config.payNumber = document.getElementById('cfgPayNumber').value.trim();
       config.payTitle = document.getElementById('cfgPayTitle').value.trim();
-      localStorage.setItem('nyec_cfg_v2', JSON.stringify(config));
-      alert("WhatsApp, Instagram & SadaPay/Raast settings saved!");
+      localStorage.setItem('nyec_cfg_v3', JSON.stringify(config));
+      alert("Settings saved successfully!");
     }
 
     function addNewItem() {
