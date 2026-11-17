@@ -48,33 +48,22 @@
       max-width: 760px; width: 100%; transform-style: preserve-3d;
     }
 
-    .intro-logo-badge {
-      width: 90px; height: 90px; border-radius: 50%; border: 3px solid #1F2937;
-      box-shadow: 0 0 25px rgba(31, 41, 55, 0.2); object-fit: cover; margin-bottom: 20px;
-      animation: pulseLogo 3s infinite ease-in-out; background: #FFFFFF;
+    .pop-gif-wrap {
+      width: 160px; height: 110px; margin-bottom: 18px;
+      border: 3px solid #1F2937; border-radius: 12px; overflow: hidden;
+      box-shadow: 6px 6px 0px #1F2937; background: #FFFFFF;
+      animation: popBounce 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards, floatGif 4s ease-in-out 1.2s infinite;
     }
-    @keyframes pulseLogo {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(31, 41, 55, 0.2); }
-      50% { transform: scale(1.06); box-shadow: 0 0 35px rgba(31, 41, 55, 0.4); }
-    }
-
-    .pop-badge-wrap {
-      width: 150px; height: 52px; margin-bottom: 18px;
-      border: 3px solid #1F2937; border-radius: 12px;
-      box-shadow: 5px 5px 0px #1F2937; background: #06D6A0; color: #1F2937;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 1px;
-      animation: popBounce 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards, floatBadge 4s ease-in-out 1.2s infinite;
-    }
+    .pop-gif-wrap img { width: 100%; height: 100%; object-fit: cover; }
 
     @keyframes popBounce {
       0% { transform: scale(0.1) rotate(-15deg) translateY(60px); opacity: 0; }
       70% { transform: scale(1.1) rotate(3deg) translateY(-8px); opacity: 1; }
       100% { transform: scale(1) rotate(0deg) translateY(0); opacity: 1; }
     }
-    @keyframes floatBadge {
+    @keyframes floatGif {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-5px) rotate(1deg); }
+      50% { transform: translateY(-5px) rotate(2deg); }
     }
 
     .scene-3d { width: 80px; height: 80px; perspective: 800px; margin-bottom: 20px; }
@@ -86,7 +75,7 @@
       position: absolute; width: 80px; height: 80px; border: 3px solid #1F2937;
       display: flex; align-items: center; justify-content: center;
       font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.85rem;
-      box-shadow: inset 0 0 15px rgba(31,29,55,0.15); backface-visibility: visible;
+      box-shadow: inset 0 0 15px rgba(31,41,55,0.15); backface-visibility: visible;
     }
     .face-front  { background: #FF6B8B; color: #FFFFFF; transform: rotateY(0deg) translateZ(40px); }
     .face-back   { background: #FFD166; color: #1F2937; transform: rotateY(180deg) translateZ(40px); }
@@ -364,9 +353,8 @@
   <!-- DEDICATED SEPARATE 3D INTRO LANDING PAGE (LIGHT PINK PASTEL) -->
   <div id="intro3dPage">
     <div class="intro-inner">
-      <img src="logo.jpg" alt="NYEC Logo" class="intro-logo-badge" onerror="this.src='https://placehold.co/90x90/06D6A0/1F2937?text=NY'">
-      <div class="pop-badge-wrap">
-        ⚡ ARCHIVE 01
+      <div class="pop-gif-wrap">
+        <img src="hamster.gif" alt="Popping Mascot" onerror="this.src='https://placehold.co/160x110/FFD1DC/1F2937?text=HAMSTER'">
       </div>
       <div class="scene-3d">
         <div class="cube-3d">
