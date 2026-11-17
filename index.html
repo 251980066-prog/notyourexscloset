@@ -144,9 +144,8 @@
     }
     .brand-container { display: flex; align-items: center; gap: 12px; cursor: pointer; }
     .brand-logo-pfp {
-      width: 42px; height: 42px; background: #221F1C; color: #EAE6DF; border: 2px solid #47413A;
-      display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 0.9rem; box-shadow: 3px 3px 0 #1E1A17; text-transform: uppercase;
+      width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
+      border: 2px solid #47413A; box-shadow: 3px 3px 0 #1E1A17; background: #221F1C;
     }
     .brand {
       font-size: 1.3rem; font-weight: 800; color: #FFFFFF;
@@ -398,7 +397,7 @@
 
   <header>
     <div class="brand-container" onclick="viewAllProducts()">
-      <div class="brand-logo-pfp">NY</div>
+      <img src="logo.jpg" alt="NYEC Logo" class="brand-logo-pfp">
       <div class="brand">NOT YOUR EX'S CLOSET</div>
     </div>
     <div class="nav-actions">
