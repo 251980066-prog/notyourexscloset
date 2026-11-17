@@ -8,15 +8,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0A0A0A;
-      --card-bg: #121212;
-      --card-border: #222222;
-      --ink: #F2F2F2;
-      --muted: #888888;
-      --accent: #E5E5E5;
-      --highlight: #FFFFFF;
-      --border: 2px solid #333333;
-      --shadow: 5px 5px 0px #222222;
+      --bg: #FFFFFF;
+      --card-bg: #F4F4F6;
+      --card-border: #E0E0E0;
+      --ink: #111111;
+      --muted: #666666;
+      --accent: #111111;
+      --highlight: #000000;
+      --border: 2px solid #E0E0E0;
+      --shadow: 4px 4px 0px #CCCCCC;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -29,7 +29,7 @@
     h1, h2, h3, .brand { font-family: 'Syne', sans-serif; }
 
     /* =========================================
-       3D FULL-SCREEN ENTRY LANDING PAGE
+        3D FULL-SCREEN ENTRY LANDING PAGE
     ========================================= */
     #intro3d {
       position: fixed; inset: 0; z-index: 9999;
@@ -109,253 +109,288 @@
     }
 
     .intro-sub {
-      color: var(--muted); font-size: clamp(0.8rem, 2vw, 0.95rem); font-weight: 600;
+      color: #888; font-size: clamp(0.8rem, 2vw, 0.95rem); font-weight: 600;
       letter-spacing: 3px; margin-bottom: 28px; opacity: 0; animation: fadeUpElem 0.65s ease 0.8s forwards;
       font-family: 'JetBrains Mono', monospace;
     }
 
     .shop-now-3d {
-      background: #FFFFFF; color: #000; border: 2px solid #FFFFFF; padding: 15px 36px;
+      background: #111; color: #fff; border: 2px solid #111; padding: 15px 36px;
       font-family: 'Syne', sans-serif; font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 800;
-      letter-spacing: 1px; cursor: pointer; box-shadow: 5px 5px 0px #333;
+      letter-spacing: 1px; cursor: pointer; box-shadow: 5px 5px 0px #444;
       opacity: 0; transform: translateY(18px); animation: fadeUpElem 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1.05s forwards;
       transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
     .shop-now-3d:hover {
-      background: #E5E5E5; transform: translate(-2px, -2px) !important;
-      box-shadow: 7px 7px 0px #444;
+      background: #333; transform: translate(-2px, -2px) !important;
+      box-shadow: 7px 7px 0px #555;
     }
     .shop-now-3d:active { transform: translate(2px, 2px) !important; box-shadow: 2px 2px 0px #222; }
 
     @keyframes fadeUpElem { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Top Marquee */
+    /* Top Marquee (Reference bar: SS-26 LIVE NOW) */
     .marquee {
-      background: #141414; color: #CCCCCC; padding: 9px 0; font-weight: 600;
-      font-size: 0.82rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 1.5px; border-bottom: var(--border); overflow: hidden; white-space: nowrap;
+      background: #111111; color: #FFFFFF; padding: 10px 0; font-weight: 700;
+      font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 2px; border-bottom: 1px solid #222; overflow: hidden; white-space: nowrap; text-align: center;
     }
     .marquee span { display: inline-block; padding-left: 100%; animation: scroll 22s linear infinite; }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-    /* Header */
+    /* Header (Reference layout & styling) */
     header {
       display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
-      padding: 16px 5%; background: var(--card-bg); border-bottom: var(--border); position: sticky; top: 0; z-index: 50; gap: 14px;
+      padding: 16px 5%; background: #FFFFFF; border-bottom: 1px solid #EAEAEA; position: sticky; top: 0; z-index: 50; gap: 14px;
     }
     .brand-container { display: flex; align-items: center; gap: 12px; cursor: pointer; }
     .brand-logo-pfp {
-      width: 42px; height: 42px; background: #1C1C1C; color: #FFF; border: 2px solid #444;
+      width: 42px; height: 42px; background: #000; color: #FFF; border-radius: 6px;
       display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 0.9rem; box-shadow: 3px 3px 0 #222; text-transform: uppercase;
+      font-weight: 800; font-size: 1rem; text-transform: uppercase;
     }
     .brand {
-      font-size: 1.3rem; font-weight: 800; color: #FFF;
-      letter-spacing: 0.5px; text-transform: uppercase;
+      font-size: 1.35rem; font-weight: 800; color: #111;
+      letter-spacing: -0.5px; text-transform: uppercase; font-family: 'Syne', sans-serif;
     }
-    .nav-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .nav-center-links {
+      display: flex; align-items: center; gap: 24px; font-weight: 600; font-size: 0.9rem;
+    }
+    .nav-center-links a, .nav-center-links button {
+      background: none; border: none; color: #333; font-weight: 600; cursor: pointer; font-family: inherit; font-size: 0.9rem; text-decoration: none; transition: color 0.15s;
+    }
+    .nav-center-links a:hover, .nav-center-links button:hover { color: #000; }
+    .nav-sale-link { color: #D32F2F !important; font-weight: 700; }
 
-    /* Buttons (Monochrome Luxury Brutalist) */
-    .btn {
-      background: #FFFFFF; color: #000000; border: 2px solid #FFFFFF; padding: 10px 18px;
-      font-family: 'Space Grotesk', sans-serif; font-weight: 700; cursor: pointer; box-shadow: 3px 3px 0 #333;
-      transition: transform 0.1s, box-shadow 0.1s; font-size: 0.85rem; text-transform: uppercase;
+    .nav-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .icon-btn {
+      background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #111; display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; transition: background 0.15s;
     }
-    .btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #555; }
-    .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #222; }
+    .icon-btn:hover { background: #F0F0F0; }
+
+    /* Buttons */
+    .btn {
+      background: #111111; color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 30px;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; cursor: pointer;
+      transition: background 0.15s, transform 0.1s; font-size: 0.85rem; text-transform: uppercase;
+    }
+    .btn:hover { background: #333333; transform: translateY(-1px); }
+    .btn:active { transform: translateY(1px); }
     
-    .btn-outline { background: transparent; color: #FFF; border: 2px solid #444; box-shadow: 3px 3px 0 #222; }
-    .btn-outline:hover { background: #1C1C1C; border-color: #666; }
+    .btn-outline { background: transparent; color: #111; border: 2px solid #111; }
+    .btn-outline:hover { background: #111; color: #FFF; }
     
-    .btn-dark { background: #1A1A1A; color: #FFF; border: 2px solid #444; box-shadow: 3px 3px 0 #222; }
-    .btn-sm { padding: 6px 12px; font-size: 0.78rem; }
+    .btn-dark { background: #222; color: #FFF; }
+    .btn-sm { padding: 6px 14px; font-size: 0.78rem; border-radius: 20px; }
 
     /* Hero Section */
     .hero {
-      padding: 48px 5%; background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.03) 0%, transparent 50%), var(--bg);
-      border-bottom: var(--border); display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: center;
+      padding: 48px 5%; background: #FFFFFF;
+      border-bottom: 1px solid #EAEAEA; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: center;
     }
     .hero-top-pills { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
     .hero-tag {
-      display: inline-block; background: #1C1C1C; color: #FFF; font-family: 'JetBrains Mono', monospace; font-weight: 700;
-      padding: 5px 12px; border: 2px solid #444; font-size: 0.78rem; box-shadow: 3px 3px 0 #222;
+      display: inline-block; background: #F0F0F0; color: #111; font-family: 'JetBrains Mono', monospace; font-weight: 700;
+      padding: 5px 12px; border-radius: 20px; font-size: 0.78rem;
     }
     .drop-timer {
-      display: inline-block; background: #111; color: #AAA; font-family: 'JetBrains Mono', monospace;
-      font-weight: 700; font-size: 0.8rem; padding: 5px 12px; border: 2px solid #333;
+      display: inline-block; background: #FFF3F3; color: #D32F2F; font-family: 'JetBrains Mono', monospace;
+      font-weight: 700; font-size: 0.8rem; padding: 5px 12px; border-radius: 20px; border: 1px solid #FFCDD2;
     }
-    .hero h1 { font-size: clamp(2.4rem, 5.2vw, 4rem); line-height: 1.02; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .hero h1 { font-size: clamp(2.4rem, 5.2vw, 4rem); line-height: 1.02; margin-bottom: 16px; letter-spacing: -1px; font-family: 'Syne', sans-serif; }
     .hero p { font-size: 1.02rem; max-width: 520px; margin-bottom: 24px; line-height: 1.6; color: var(--muted); }
     .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
-    .hero-box { background: var(--card-bg); border: 2px solid #333; box-shadow: 6px 6px 0 #1C1C1C; padding: 24px; }
-    .hero-box h3 { color: #FFF; margin-bottom: 10px; font-size: 1.05rem; letter-spacing: 0.5px; }
-    .hero-box p { color: #999; font-size: 0.86rem; line-height: 1.6; }
+    .hero-box { background: #F8F8F8; border: 1px solid #E5E5E5; border-radius: 12px; padding: 24px; }
+    .hero-box h3 { color: #111; margin-bottom: 10px; font-size: 1.05rem; letter-spacing: 0.5px; }
+    .hero-box p { color: #666; font-size: 0.86rem; line-height: 1.6; }
 
     /* Categories Bar */
-    .category-section { padding: 28px 5%; background: var(--bg); border-bottom: var(--border); }
-    .cat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 12px; }
+    .category-section { padding: 28px 5%; background: #FFFFFF; border-bottom: 1px solid #EAEAEA; }
+    .cat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
     .cat-grid { display: flex; flex-wrap: wrap; gap: 10px; }
     .cat-card {
-      background: var(--card-bg); border: 2px solid #333; box-shadow: 3px 3px 0 #1c1c1c;
-      padding: 9px 16px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; color: #bbb; font-size: 0.9rem;
-      transition: all 0.1s ease;
+      background: #F4F4F6; border: 1px solid #E5E5E5; border-radius: 30px;
+      padding: 10px 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; color: #555; font-size: 0.9rem;
+      transition: all 0.15s ease;
     }
-    .cat-card:hover { border-color: #666; color: #fff; }
-    .cat-card.active { background: #FFF; color: #000; border-color: #FFF; box-shadow: 3px 3px 0 #444; }
-    .cat-count { background: #1C1C1C; color: #AAA; border: 1px solid #444; padding: 2px 6px; font-size: 0.72rem; font-family: monospace; }
-    .cat-card.active .cat-count { background: #000; color: #FFF; border-color: #000; }
+    .cat-card:hover { background: #EAEAEA; color: #000; }
+    .cat-card.active { background: #111; color: #FFF; border-color: #111; }
+    .cat-count { background: #FFFFFF; color: #333; border-radius: 20px; padding: 2px 7px; font-size: 0.72rem; font-family: monospace; }
+    .cat-card.active .cat-count { background: #333; color: #FFF; }
 
     /* Filter Controls */
     .controls {
       padding: 16px 5%; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between;
-      align-items: center; border-bottom: var(--border); background: var(--card-bg);
+      align-items: center; border-bottom: 1px solid #EAEAEA; background: #FAFAFA;
     }
     .filter-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
     .filter-label { font-weight: 700; font-size: 0.82rem; color: var(--muted); font-family: monospace; }
-    .chip { border: 2px solid #333; padding: 6px 14px; font-weight: 700; background: #141414; color: #999; cursor: pointer; font-size: 0.85rem; }
-    .chip.active { background: #262626; color: #FFF; border-color: #666; box-shadow: 2px 2px 0 #111; }
+    .chip { border: 1px solid #DDD; padding: 6px 14px; font-weight: 700; background: #FFF; color: #444; cursor: pointer; font-size: 0.85rem; border-radius: 20px; transition: all 0.15s; }
+    .chip:hover { border-color: #111; }
+    .chip.active { background: #111; color: #FFF; border-color: #111; }
 
-    .rack-status { padding: 22px 5% 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .rack-status h3 { font-size: 1.2rem; letter-spacing: 0.5px; }
+    .rack-status { padding: 24px 5% 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .rack-status h3 { font-size: 1.4rem; letter-spacing: -0.5px; font-family: 'Syne', sans-serif; }
 
-    /* Product Grid */
+    /* Product Grid & Cards (Reference Screenshot styling) */
     .grid { padding: 24px 5% 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 26px; }
     .card {
-      background: var(--card-bg); border: 2px solid #282828; box-shadow: 5px 5px 0 #161616;
-      display: flex; flex-direction: column; position: relative; transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: #EFEFEF; border-radius: 16px; border: 1px solid #E5E5E5;
+      display: flex; flex-direction: column; position: relative; overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .card:hover { transform: translateY(-4px); border-color: #666; box-shadow: 8px 8px 0 #222; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
     .card.sold-card { opacity: 0.6; filter: grayscale(50%); }
     .img-wrap {
-      height: 300px; border-bottom: 2px solid #282828; background: #0c0c0c; position: relative;
+      height: 320px; background: #E5E5E5; position: relative;
       overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer;
     }
     .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
     .card:hover .img-wrap img { transform: scale(1.05); }
-    .zoom-hint {
-      position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.85); color: #CCC;
-      border: 1px solid #444; padding: 3px 8px; font-size: 0.7rem; font-weight: 700; font-family: monospace;
+    
+    /* Reference Pill Badges */
+    .badge-discount {
+      position: absolute; top: 12px; left: 12px; background: #111111; color: #FFFFFF; 
+      padding: 5px 12px; font-size: 0.72rem; font-weight: 700; font-family: monospace; border-radius: 20px;
     }
-    .badge { position: absolute; top: 10px; left: 10px; background: #1C1C1C; color: #FFF; border: 1px solid #444; padding: 3px 8px; font-size: 0.72rem; font-weight: 700; font-family: monospace; }
-    .badge-cat { position: absolute; top: 10px; right: 10px; background: #2A2A2A; color: #DDD; border: 1px solid #555; padding: 3px 8px; font-size: 0.7rem; font-weight: 700; font-family: monospace; }
-    .badge-cond { position: absolute; bottom: 10px; right: 10px; background: #000; color: #CCC; border: 1px solid #444; padding: 3px 8px; font-size: 0.7rem; font-weight: 700; font-family: monospace; }
-    .sold-stamp {
-      position: absolute; background: #1C1C1C; color: #FFF; border: 2px solid #555;
-      padding: 7px 16px; font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; transform: rotate(-12deg); box-shadow: 3px 3px 0 #000;
+    .badge-rating {
+      position: absolute; top: 12px; right: 12px; background: #FFFFFF; color: #111111; 
+      padding: 5px 10px; font-size: 0.75rem; font-weight: 700; font-family: monospace; border-radius: 20px;
+      display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
-    .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .card-title { cursor: pointer; font-size: 1rem; font-weight: 700; color: #FFF; }
-    .card-title:hover { color: #AAA; }
-    .card-meta { font-size: 0.8rem; color: var(--muted); font-weight: 600; margin: 6px 0 12px; font-family: monospace; }
-    .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px; }
-    .price { font-size: 1.2rem; font-weight: 800; color: #FFF; font-family: 'Syne', sans-serif; }
+    .badge-rating span { color: #FFA000; }
 
-    .empty-state { grid-column: 1 / -1; background: var(--card-bg); border: var(--border); box-shadow: var(--shadow); padding: 45px 20px; text-align: center; }
+    .zoom-hint {
+      position: absolute; bottom: 12px; left: 12px; background: rgba(0,0,0,0.75); color: #FFF;
+      padding: 4px 10px; font-size: 0.7rem; font-weight: 700; font-family: monospace; border-radius: 12px;
+    }
+    .badge-cond {
+      position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.75); color: #FFF;
+      padding: 4px 10px; font-size: 0.7rem; font-weight: 700; font-family: monospace; border-radius: 12px;
+    }
+
+    .sold-stamp {
+      position: absolute; background: #111; color: #FFF; border-radius: 8px;
+      padding: 8px 18px; font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; transform: rotate(-12deg); box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; background: #EFEFEF; }
+    .card-title { cursor: pointer; font-size: 1.05rem; font-weight: 700; color: #111; font-family: 'Space Grotesk', sans-serif; }
+    .card-title:hover { color: #555; }
+    .card-meta { font-size: 0.8rem; color: var(--muted); font-weight: 600; margin: 6px 0 14px; font-family: monospace; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px; }
+    .price { font-size: 1.25rem; font-weight: 800; color: #111; font-family: 'Syne', sans-serif; }
+
+    .empty-state { grid-column: 1 / -1; background: #F8F8F8; border-radius: 16px; padding: 45px 20px; text-align: center; }
 
     /* Community Reviews Section */
-    .reviews-section { padding: 44px 5%; background: #070707; border-top: var(--border); border-bottom: var(--border); }
+    .reviews-section { padding: 48px 5%; background: #FAFAFA; border-top: 1px solid #EAEAEA; border-bottom: 1px solid #EAEAEA; }
     .reviews-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 24px; }
-    .reviews-header h3 { color: #FFF; font-size: 1.35rem; }
+    .reviews-header h3 { color: #111; font-size: 1.4rem; font-family: 'Syne', sans-serif; }
     .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
     .review-card {
-      background: var(--card-bg); border: 2px solid #282828; box-shadow: 4px 4px 0 #161616; padding: 20px;
-      display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.15s;
+      background: #FFFFFF; border-radius: 16px; border: 1px solid #E5E5E5; padding: 22px;
+      display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.03); transition: transform 0.15s;
     }
-    .review-card:hover { transform: translateY(-3px); border-color: #555; }
-    .review-stars { color: #DDD; font-weight: 700; font-size: 0.88rem; margin-bottom: 8px; letter-spacing: 1px; }
-    .review-text { font-size: 0.92rem; line-height: 1.55; margin-bottom: 14px; color: #CCC; }
-    .review-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #222; padding-top: 10px; font-size: 0.78rem; font-family: monospace; }
-    .review-author { font-weight: 700; color: #FFF; }
+    .review-card:hover { transform: translateY(-3px); }
+    .review-stars { color: #FFA000; font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; letter-spacing: 1px; }
+    .review-text { font-size: 0.92rem; line-height: 1.55; margin-bottom: 14px; color: #333; }
+    .review-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #F0F0F0; padding-top: 12px; font-size: 0.78rem; font-family: monospace; }
+    .review-author { font-weight: 700; color: #111; }
     .review-date { color: #777; }
 
     /* Lookbook PDP Modal */
     .modal-overlay {
-      position: fixed; inset: 0; background: rgba(5,5,5,0.88); backdrop-filter: blur(6px);
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
       display: none; justify-content: center; align-items: center; z-index: 100; padding: 16px;
     }
     .modal-overlay.open { display: flex; }
     .pdp-modal {
-      background: #111111; color: #fff; border: 2px solid #444; box-shadow: 10px 10px 0 #1C1C1C;
+      background: #FFFFFF; color: #111; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
       width: 100%; max-width: 950px; max-height: 92vh; overflow-y: auto; padding: 32px; position: relative;
     }
     .pdp-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: start; }
     .pdp-gallery { display: flex; gap: 14px; }
     .pdp-thumbs { display: flex; flex-direction: column; gap: 10px; }
-    .pdp-thumb { width: 68px; height: 82px; border: 2px solid #333; cursor: pointer; object-fit: cover; background: #000; transition: border-color 0.1s; }
-    .pdp-thumb.active, .pdp-thumb:hover { border-color: #FFF; }
-    .pdp-main-img-wrap { flex: 1; border: 2px solid #333; background: #000; position: relative; height: 420px; }
+    .pdp-thumb { width: 68px; height: 82px; border-radius: 8px; border: 2px solid #E5E5E5; cursor: pointer; object-fit: cover; background: #000; transition: border-color 0.15s; }
+    .pdp-thumb.active, .pdp-thumb:hover { border-color: #111; }
+    .pdp-main-img-wrap { flex: 1; border-radius: 12px; border: 1px solid #E5E5E5; background: #F4F4F6; position: relative; height: 420px; overflow: hidden; }
     .pdp-main-img { width: 100%; height: 100%; object-fit: cover; }
     
-    .pdp-info h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; margin-bottom: 8px; color: #fff; }
+    .pdp-info h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; margin-bottom: 8px; color: #111; }
     .pdp-prices { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .pdp-current-price { font-size: 1.5rem; font-weight: 800; color: #FFF; font-family: 'Syne', sans-serif; }
-    .pdp-old-price { font-size: 1rem; color: #666; text-decoration: line-through; }
-    .pdp-rating { color: #CCC; font-size: 0.85rem; font-weight: 700; margin-bottom: 16px; font-family: monospace; }
+    .pdp-current-price { font-size: 1.5rem; font-weight: 800; color: #111; font-family: 'Syne', sans-serif; }
+    .pdp-old-price { font-size: 1rem; color: #888; text-decoration: line-through; }
+    .pdp-rating { color: #333; font-size: 0.85rem; font-weight: 700; margin-bottom: 16px; font-family: monospace; }
 
     .pdp-qty-row {
       display: flex; justify-content: space-between; align-items: center;
-      background: #181818; border: 2px solid #333; padding: 10px 16px; margin-bottom: 16px; font-weight: 700; font-family: monospace;
+      background: #F8F8F8; border-radius: 10px; border: 1px solid #E5E5E5; padding: 12px 16px; margin-bottom: 16px; font-weight: 700; font-family: monospace;
     }
-    .pdp-qty-stepper { display: flex; align-items: center; gap: 14px; font-size: 1.1rem; color: #FFF; }
-    .pdp-qty-stepper button { background: none; border: none; color: #AAA; font-size: 1.2rem; cursor: pointer; font-weight: 700; }
+    .pdp-qty-stepper { display: flex; align-items: center; gap: 14px; font-size: 1.1rem; color: #111; }
+    .pdp-qty-stepper button { background: none; border: none; color: #666; font-size: 1.2rem; cursor: pointer; font-weight: 700; }
 
     .pdp-sizes-label { font-size: 0.82rem; font-weight: 700; color: var(--muted); margin-bottom: 8px; font-family: monospace; }
     .pdp-sizes-grid { display: flex; gap: 8px; margin-bottom: 20px; }
     .pdp-size-btn {
-      flex: 1; background: #181818; border: 2px solid #333; color: #fff; padding: 10px 0;
+      flex: 1; background: #F8F8F8; border: 1px solid #E5E5E5; color: #111; padding: 10px 0; border-radius: 8px;
       text-align: center; font-weight: 700; cursor: pointer; font-size: 0.9rem; font-family: monospace;
     }
-    .pdp-size-btn.active { background: #FFF; color: #000; border-color: #FFF; box-shadow: 2px 2px 0 #444; }
+    .pdp-size-btn.active { background: #111; color: #FFF; border-color: #111; }
     .pdp-action-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
     .pdp-specs-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 16px 0; }
-    .pdp-spec-pill { background: #181818; border: 2px solid #333; padding: 8px; text-align: center; font-size: 0.78rem; }
-    .pdp-spec-pill strong { color: #DDD; font-family: monospace; font-size: 0.72rem; display: block; margin-bottom: 4px; }
+    .pdp-spec-pill { background: #F8F8F8; border-radius: 8px; border: 1px solid #E5E5E5; padding: 10px 8px; text-align: center; font-size: 0.78rem; }
+    .pdp-spec-pill strong { color: #555; font-family: monospace; font-size: 0.72rem; display: block; margin-bottom: 4px; }
 
-    /* Trust & Footer */
+    /* Trust & Footer (Reference Dark Footer styling) */
     .trust-strip {
-      background: #050505; color: #fff; padding: 32px 5%; display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; border-top: var(--border);
+      background: #FAFAFA; color: #111; padding: 36px 5%; display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; border-top: 1px solid #EAEAEA;
     }
-    .trust-item h4 { color: #FFF; margin-bottom: 8px; font-size: 1rem; }
-    .trust-item p { font-size: 0.86rem; color: #888; line-height: 1.55; }
+    .trust-item h4 { color: #111; margin-bottom: 8px; font-size: 1rem; font-family: 'Syne', sans-serif; }
+    .trust-item p { font-size: 0.86rem; color: #666; line-height: 1.55; }
+    
     footer {
-      background: #111111; color: #FFF; border-top: var(--border); padding: 26px 5%;
-      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-weight: 700;
+      background: #141414; color: #FFFFFF; border-top: 1px solid #222; padding: 40px 5%;
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 24px; font-weight: 600;
     }
-    footer a { color: #FFF; text-decoration: underline; }
-    .footer-links { display: flex; flex-wrap: wrap; gap: 16px; }
-    .footer-links button { background: none; border: none; font-weight: 700; text-decoration: underline; cursor: pointer; font-family: inherit; font-size: 0.9rem; color: #CCC; }
+    footer a { color: #FFFFFF; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-col { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col h4 { font-family: 'Syne', sans-serif; font-size: 1.1rem; margin-bottom: 6px; color: #FFF; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links button { background: none; border: none; font-weight: 600; text-align: left; cursor: pointer; font-family: inherit; font-size: 0.9rem; color: #AAAAAA; padding: 0; transition: color 0.15s; }
+    .footer-links button:hover { color: #FFF; }
 
     /* Standard Modals */
     .overlay {
-      position: fixed; inset: 0; background: rgba(5,5,5,0.85); backdrop-filter: blur(5px);
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
       display: none; justify-content: center; align-items: center; z-index: 100; padding: 16px;
     }
     .overlay.open { display: flex; }
     .modal {
-      background: var(--card-bg); color: #fff; border: 2px solid #444; box-shadow: 10px 10px 0 #1C1C1C;
-      width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; padding: 28px; position: relative;
+      background: #FFFFFF; color: #111; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; padding: 32px; position: relative;
     }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #282828; padding-bottom: 12px; margin-bottom: 16px; }
-    .field { margin-bottom: 12px; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #EAEAEA; padding-bottom: 14px; margin-bottom: 20px; }
+    .field { margin-bottom: 14px; }
     .field label { display: block; font-weight: 700; font-size: 0.82rem; margin-bottom: 6px; color: var(--muted); font-family: monospace; }
     .field input, .field select, .field textarea {
-      width: 100%; padding: 11px; border: 2px solid #333; font-family: inherit; font-size: 0.92rem; background: #181818; color: #fff; outline: none;
+      width: 100%; padding: 12px; border: 1px solid #DDD; border-radius: 8px; font-family: inherit; font-size: 0.92rem; background: #FAFAFA; color: #111; outline: none;
     }
-    .field input.input-error { border-color: #888; background: #261212; }
+    .field input.input-error { border-color: #D32F2F; background: #FFF5F5; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-    .pay-details-box { background: rgba(255,255,255,0.03); border: 2px solid #333; padding: 12px; margin-bottom: 12px; font-size: 0.85rem; line-height: 1.5; color: #ccc; }
+    .pay-details-box { background: #F8F8F8; border: 1px solid #E5E5E5; border-radius: 10px; padding: 14px; margin-bottom: 14px; font-size: 0.85rem; line-height: 1.5; color: #333; }
     .pay-copy-row {
-      display: flex; justify-content: space-between; align-items: center; background: #0c0c0c; border: 2px solid #333;
-      padding: 8px 10px; margin-top: 6px; font-family: monospace; font-weight: 700; font-size: 0.9rem; color: #FFF;
+      display: flex; justify-content: space-between; align-items: center; background: #FFF; border: 1px solid #DDD; border-radius: 8px;
+      padding: 8px 12px; margin-top: 8px; font-family: monospace; font-weight: 700; font-size: 0.9rem; color: #111;
     }
-    .receipt-box { background: #080808; color: #CCC; padding: 12px; font-family: monospace; font-size: 0.82rem; white-space: pre-wrap; border: 2px solid #282828; margin: 12px 0; }
-    .admin-row { display: flex; justify-content: space-between; align-items: center; padding: 9px; border: 2px solid #282828; margin-bottom: 8px; background: #181818; gap: 8px; }
-    .confirm-box { background: #121212; border: 2px solid #444; box-shadow: 6px 6px 0 #222; padding: 22px; text-align: center; }
-    .confirm-badge { display: inline-block; background: #222; color: #FFF; border: 1px solid #555; padding: 4px 12px; font-weight: 700; font-size: 0.78rem; margin-bottom: 10px; font-family: monospace; }
+    .receipt-box { background: #141414; color: #E0E0E0; padding: 14px; border-radius: 10px; font-family: monospace; font-size: 0.82rem; white-space: pre-wrap; border: 1px solid #333; margin: 14px 0; }
+    .admin-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border: 1px solid #E5E5E5; border-radius: 8px; margin-bottom: 8px; background: #FAFAFA; gap: 8px; }
+    .confirm-box { background: #F8F8F8; border-radius: 16px; border: 1px solid #E5E5E5; padding: 24px; text-align: center; }
+    .confirm-badge { display: inline-block; background: #E8F5E9; color: #2E7D32; border: 1px solid #C8E6C9; border-radius: 20px; padding: 4px 12px; font-weight: 700; font-size: 0.78rem; margin-bottom: 12px; font-family: monospace; }
     .tracking-pill {
-      background: #000; color: #FFF; font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700;
-      padding: 12px 16px; border: 2px solid #444; margin: 12px 0; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+      background: #111; color: #FFF; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700;
+      padding: 12px 16px; border-radius: 10px; margin: 14px 0; display: flex; justify-content: space-between; align-items: center; gap: 8px;
     }
 
     @media (max-width: 820px) {
@@ -364,6 +399,7 @@
       .pdp-gallery { flex-direction: column-reverse; }
       .pdp-thumbs { flex-direction: row; }
       .pdp-thumb { width: 60px; height: 70px; }
+      .nav-center-links { display: none; }
     }
   </style>
 </head>
@@ -393,18 +429,24 @@
   </div>
 
   <div class="marquee">
-    <span>⚡ 1-OF-1 CURATED VINTAGE & STREETWEAR // ZERO RESTOCKS ONCE GONE // RS. 150 OFF + FREE SHIPPING ON SADAPAY / NAYAPAY / RAAST // NATIONWIDE COD DELIVERY ⚡</span>
+    <span>⚡ SS-26 LIVE NOW // 1-OF-1 CURATED VINTAGE & STREETWEAR // ZERO RESTOCKS ONCE GONE // RS. 150 OFF + FREE SHIPPING ON SADAPAY / NAYAPAY / RAAST // NATIONWIDE COD DELIVERY ⚡</span>
   </div>
 
+  <!-- HEADER -->
   <header>
     <div class="brand-container" onclick="viewAllProducts()">
       <div class="brand-logo-pfp">NY</div>
       <div class="brand">NOT YOUR EX'S CLOSET</div>
     </div>
+    <div class="nav-center-links">
+      <button onclick="viewAllProducts()">Shop By Category</button>
+      <button onclick="viewAllProducts()">New Arrivals</button>
+      <button class="nav-sale-link" onclick="viewAllProducts()">END OF SEASON SALE - Upto 50% OFF</button>
+    </div>
     <div class="nav-actions">
-      <button class="btn btn-outline btn-sm" onclick="viewAllProducts()">ALL DROPS</button>
-      <a href="https://instagram.com/notyo._.urexscloset" target="_blank"><button class="btn btn-outline btn-sm">INSTAGRAM ↗</button></a>
-      <button class="btn" onclick="openBagModal()">THRIFT BAG (<span id="bagCount">0</span>)</button>
+      <button class="icon-btn" onclick="viewAllProducts()" title="Search">🔍</button>
+      <button class="icon-btn" onclick="openAdmin()" title="Account / Admin">👤</button>
+      <button class="icon-btn" onclick="openBagModal()" title="Cart">🛒 (<span id="bagCount" style="font-size:0.8rem; font-weight:700;">0</span>)</button>
     </div>
   </header>
 
@@ -492,14 +534,31 @@
     </div>
   </section>
 
+  <!-- FOOTER (Reference dark footer layout) -->
   <footer>
-    <div>© 2026 NOT YOUR EX'S CLOSET (<a href="https://instagram.com/notyo._.urexscloset" target="_blank">@notyo._.urexscloset</a>)</div>
-    <div class="footer-links">
-      <button onclick="viewAllProducts()">View All Drops</button>
-      <a href="https://instagram.com/notyo._.urexscloset" target="_blank" style="color:#FFF; font-weight:700; text-decoration:underline;">Instagram ↗</a>
-      <button onclick="openPolicy('shipping')">Shipping & COD</button>
-      <button onclick="openPolicy('returns')">Return Policy</button>
-      <button onclick="openPolicy('sizing')">Size Guide</button>
+    <div class="footer-col">
+      <h4>Quick links</h4>
+      <div class="footer-links">
+        <button onclick="openPolicy('about')">About Us</button>
+        <button onclick="openPolicy('faq')">FAQ'S</button>
+        <button onclick="openPolicy('returns')">Exchange & Returns</button>
+        <button onclick="openPolicy('shipping')">Shipping Policy</button>
+        <button onclick="openPolicy('privacy')">Privacy Policy</button>
+        <button onclick="openPolicy('contact')">Contact</button>
+        <button onclick="openBagModal()">Track Your Order</button>
+      </div>
+    </div>
+    <div class="footer-col" style="max-width: 450px;">
+      <h4>About Us</h4>
+      <p style="font-size:0.86rem; color:#AAA; line-height:1.6; font-family:monospace;">
+        Founded in 2026, Not Your Ex's Closet is a digital streetwear and vintage clothing thrift store built for the young and bold. We deliver trend-driven, high-impact fashion at speed, from elevated basics to statement pieces, all designed to reflect the now.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="https://instagram.com/notyo._.urexscloset" target="_blank" style="color:#CCC; font-size:0.9rem;">Instagram ↗</a>
+      <a href="https://api.whatsapp.com/send?phone=923167271822" target="_blank" style="color:#CCC; font-size:0.9rem;">WhatsApp Support</a>
+      <div style="margin-top:12px; font-size:0.78rem; color:#777;">© 2026 NOT YOUR EX'S CLOSET</div>
     </div>
   </footer>
 
@@ -541,7 +600,7 @@
         <div class="pdp-gallery">
           <div class="pdp-thumbs" id="pdpThumbnails"></div>
           <div class="pdp-main-img-wrap">
-            <img id="pdpMainImg" class="pdp-main-img" src="" alt="Product View" onerror="this.src='https://placehold.co/600x600/0E0E0E/FFFFFF?text=NYEC+ARCHIVE'">
+            <img id="pdpMainImg" class="pdp-main-img" src="" alt="Product View" onerror="this.src='https://placehold.co/600x600/E5E5E5/111111?text=NYEC+ARCHIVE'">
           </div>
         </div>
         <div class="pdp-info">
@@ -555,14 +614,14 @@
             <span>AVAILABILITY</span>
             <div class="pdp-qty-stepper"><button>&lt;</button><span>1-OF-1</span><button>&gt;</button></div>
           </div>
-          <div class="pdp-sizes-label">SELECTED SIZE: <span id="pdpSelectedSizeName" style="color:#FFF;">L</span></div>
+          <div class="pdp-sizes-label">SELECTED SIZE: <span id="pdpSelectedSizeName" style="color:#111;">L</span></div>
           <div class="pdp-sizes-grid" id="pdpSizeButtons"></div>
           <div class="pdp-specs-box">
             <div class="pdp-spec-pill"><strong>MEASUREMENTS</strong><span id="pdpDims">24" x 28"</span></div>
             <div class="pdp-spec-pill"><strong>CONDITION</strong><span id="pdpCond">9.5/10</span></div>
             <div class="pdp-spec-pill"><strong>CATEGORY</strong><span id="pdpCat">JACKETS</span></div>
           </div>
-          <p id="pdpNotes" style="font-size:0.86rem; color:#aaa; line-height:1.6; margin-bottom:16px; font-family:monospace;"></p>
+          <p id="pdpNotes" style="font-size:0.86rem; color:#555; line-height:1.6; margin-bottom:16px; font-family:monospace;"></p>
           <div class="pdp-action-stack" id="pdpActionArea">
             <button class="btn" style="width:100%;" onclick="claimFromPDP()">+ ADD TO THRIFT BAG & CLAIM</button>
           </div>
@@ -580,7 +639,7 @@
       </div>
       <div id="bagCheckoutView">
         <div id="bagItems"></div>
-        <div id="checkoutForm" style="display:none; margin-top:16px; border-top:2px solid #282828; padding-top:14px;">
+        <div id="checkoutForm" style="display:none; margin-top:16px; border-top:1px solid #EAEAEA; padding-top:14px;">
           <div class="grid-2">
             <div class="field"><label>YOUR NAME *</label><input type="text" id="custName" placeholder="e.g. Ali Raza" oninput="clearError(this); updateReceipt()"></div>
             <div class="field"><label>PHONE NUMBER *</label><input type="tel" id="custPhone" placeholder="0316-7271822" oninput="clearError(this); updateReceipt()"></div>
@@ -616,14 +675,14 @@
         <div class="confirm-box">
           <div class="confirm-badge">✓ ORDER SLIP GENERATED & RESERVED</div>
           <h2 style="margin-bottom:6px; font-family:'Syne',sans-serif;">ORDER CONFIRMED!</h2>
-          <p style="font-size:0.9rem; color:#bbb; margin-bottom:12px;">Save your Tracking ID below. Share it anytime on WhatsApp or Instagram DM to check your parcel status.</p>
+          <p style="font-size:0.9rem; color:#555; margin-bottom:12px;">Save your Tracking ID below. Share it anytime on WhatsApp or Instagram DM to check your parcel status.</p>
           <div class="tracking-pill">
             <span id="confirmedTrackingId">NYEC-TRK-0000</span>
             <button class="btn btn-outline btn-sm" onclick="copyTrackingId()">COPY ID</button>
           </div>
-          <div id="confirmedDigitalNote" style="background:rgba(255,255,255,0.04); border:2px solid #333; padding:10px; font-size:0.84rem; margin-bottom:10px; text-align:left; color:#ccc;"></div>
+          <div id="confirmedDigitalNote" style="background:#FFF; border:1px solid #DDD; border-radius:8px; padding:10px; font-size:0.84rem; margin-bottom:10px; text-align:left; color:#333;"></div>
           <div class="receipt-box" id="confirmedReceiptCopy" style="text-align:left;"></div>
-          <p style="font-size:0.84rem; color:#aaa; margin-bottom:14px; line-height:1.45;">
+          <p style="font-size:0.84rem; color:#666; margin-bottom:14px; line-height:1.45;">
             <strong>Next Step:</strong> Make sure you hit <strong>Send</strong> in WhatsApp or paste in Insta DM (@notyo._.urexscloset) so our team dispatches your parcel within 24 hours via PostEx / Leopards / TCS.
           </p>
           <button class="btn btn-outline" style="width:100%;" onclick="closeModal('bagModal')">CONTINUE BROWSING RACK</button>
@@ -639,7 +698,7 @@
         <h3>⚙️ STORE OWNER PANEL</h3>
         <button class="btn btn-outline btn-sm" onclick="closeModal('adminModal')">X</button>
       </div>
-      <div style="background:#1c1c1c; color:#fff; padding:10px; border:2px solid #444; margin-bottom:14px; font-size:0.84rem; font-weight:600;">
+      <div style="background:#F4F4F6; color:#111; padding:10px; border-radius:8px; border:1px solid #DDD; margin-bottom:14px; font-size:0.84rem; font-weight:600;">
         <strong>Store Config:</strong> WhatsApp is locked to <code>03167271822</code> and Instagram to <code>notyo._.urexscloset</code>.
       </div>
       <div class="grid-2">
@@ -651,7 +710,7 @@
         <div class="field"><label>ACCOUNT TITLE</label><input type="text" id="cfgPayTitle" placeholder="NOT YOUR EXS CLOSET"></div>
       </div>
       <button class="btn btn-outline btn-sm" onclick="saveConfig()" style="margin-bottom:18px; width:100%;">SAVE SETTINGS</button>
-      <h4 style="border-top:2px solid #282828; padding-top:12px; margin-bottom:10px; color:#FFF;">+ ADD NEW 1-OF-1 ITEM</h4>
+      <h4 style="border-top:1px solid #EAEAEA; padding-top:12px; margin-bottom:10px; color:#111;">+ ADD NEW 1-OF-1 ITEM</h4>
       <div class="grid-2">
         <div class="field"><label>ITEM TITLE</label><input type="text" id="newTitle" placeholder="Vintage Nike Windbreaker"></div>
         <div class="field">
@@ -679,10 +738,10 @@
       <div class="field"><label>IMAGE URL (OR LEAVE BLANK)</label><input type="text" id="newImg" placeholder="https://..."></div>
       <button class="btn" onclick="addNewItem()" style="width:100%; margin-bottom:18px;">+ PUBLISH TO RACK</button>
       
-      <h4 style="border-top:2px solid #282828; padding-top:12px; margin-bottom:10px; color:#FFF;">MANAGE REVIEWS</h4>
+      <h4 style="border-top:1px solid #EAEAEA; padding-top:12px; margin-bottom:10px; color:#111;">MANAGE REVIEWS</h4>
       <div id="adminReviewsList" style="margin-bottom:18px;"></div>
 
-      <h4 style="border-top:2px solid #282828; padding-top:12px; margin-bottom:10px; color:#FFF;">MANAGE LIVE RACK</h4>
+      <h4 style="border-top:1px solid #EAEAEA; padding-top:12px; margin-bottom:10px; color:#111;">MANAGE LIVE RACK</h4>
       <div id="adminInventoryList"></div>
     </div>
   </div>
@@ -694,7 +753,7 @@
         <h3 id="policyTitle">INFO</h3>
         <button class="btn btn-outline btn-sm" onclick="closeModal('policyModal')">X</button>
       </div>
-      <div id="policyBody" style="line-height:1.6; font-size:0.92rem; color:#aaa; font-family:monospace;"></div>
+      <div id="policyBody" style="line-height:1.6; font-size:0.92rem; color:#444; font-family:monospace;"></div>
     </div>
   </div>
 
@@ -753,9 +812,9 @@
       { key: "BOTTOMS", label: "BOTTOMS" }
     ];
 
-    let items = JSON.parse(localStorage.getItem('nyec_items_v4')) || defaultItems;
-    let reviews = JSON.parse(localStorage.getItem('nyec_reviews_v2')) || defaultReviews;
-    let config = JSON.parse(localStorage.getItem('nyec_cfg_v4')) || {
+    let items = JSON.parse(localStorage.getItem('nyec_items_v5')) || defaultItems;
+    let reviews = JSON.parse(localStorage.getItem('nyec_reviews_v3')) || defaultReviews;
+    let config = JSON.parse(localStorage.getItem('nyec_cfg_v5')) || {
       whatsapp: "923167271822",
       insta: "notyo._.urexscloset",
       payNumber: "03167271822",
@@ -773,8 +832,8 @@
       return `NYEC-TRK-${rand}`;
     }
 
-    function saveData() { localStorage.setItem('nyec_items_v4', JSON.stringify(items)); }
-    function saveReviews() { localStorage.setItem('nyec_reviews_v2', JSON.stringify(reviews)); }
+    function saveData() { localStorage.setItem('nyec_items_v5', JSON.stringify(items)); }
+    function saveReviews() { localStorage.setItem('nyec_reviews_v3', JSON.stringify(reviews)); }
 
     function renderCategoryTabs() {
       document.getElementById('totalHeroCount').textContent = items.length;
@@ -829,8 +888,8 @@
       if (filtered.length === 0) {
         grid.innerHTML = `
           <div class="empty-state">
-            <h3 style="margin-bottom:8px;">NO PIECES MATCH THIS FILTER</h3>
-            <p style="margin-bottom:16px;">Everything in this exact filter might be claimed or hasn't dropped yet.</p>
+            <h3 style="margin-bottom:8px; font-family:'Syne',sans-serif;">NO PIECES MATCH THIS FILTER</h3>
+            <p style="margin-bottom:16px; color:#666;">Everything in this exact filter might be claimed or hasn't dropped yet.</p>
             <button class="btn btn-outline" onclick="viewAllProducts()">VIEW ALL PRODUCTS</button>
           </div>
         `;
@@ -840,9 +899,9 @@
       grid.innerHTML = filtered.map(item => `
         <div class="card ${item.sold ? 'sold-card' : ''}">
           <div class="img-wrap" onclick="openQuickView('${item.id}')">
-            <img src="${item.img}" alt="${item.title}" onerror="this.src='https://placehold.co/600x600/0E0E0E/FFFFFF?text=1-OF-1+DROP'">
-            <div class="badge">${item.id} • ${item.size}</div>
-            <div class="badge-cat">${item.category}</div>
+            <img src="${item.img}" alt="${item.title}" onerror="this.src='https://placehold.co/600x600/E5E5E5/111111?text=1-OF-1+DROP'">
+            <div class="badge-discount">Save 24%</div>
+            <div class="badge-rating"><span>★</span> 4.9</div>
             <div class="zoom-hint">🔍 INSPECT</div>
             <div class="badge-cond">${item.cond}</div>
             ${item.sold ? '<div class="sold-stamp">SOLD OUT</div>' : ''}
@@ -850,7 +909,7 @@
           <div class="card-body">
             <div>
               <h3 class="card-title" onclick="openQuickView('${item.id}')">${item.title}</h3>
-              <div class="card-meta">Specs: ${item.dims}</div>
+              <div class="card-meta">Specs: ${item.dims} • Size ${item.size}</div>
             </div>
             <div class="price-row">
               <div class="price">Rs. ${item.price.toLocaleString()}</div>
@@ -925,7 +984,7 @@
       
       const thumbsContainer = document.getElementById('pdpThumbnails');
       thumbsContainer.innerHTML = gallery.map((imgUrl, idx) => `
-        <img class="pdp-thumb ${idx === 0 ? 'active' : ''}" src="${imgUrl}" onerror="this.src='https://placehold.co/600x600/0E0E0E/FFFFFF?text=NYEC'" onclick="switchPdpImage('${imgUrl}', this)">
+        <img class="pdp-thumb ${idx === 0 ? 'active' : ''}" src="${imgUrl}" onerror="this.src='https://placehold.co/600x600/E5E5E5/111111?text=NYEC'" onclick="switchPdpImage('${imgUrl}', this)">
       `).join('');
 
       const sizes = ['S', 'M', 'L', 'XL'];
@@ -1021,7 +1080,7 @@
 
       container.innerHTML = bag.map(i => `
         <div class="admin-row">
-          <div><strong style="color:#fff;">${i.title}</strong> (${i.id} - Size ${i.size})<br><span style="color:#aaa;">Rs. ${i.price.toLocaleString()}</span></div>
+          <div><strong style="color:#111;">${i.title}</strong> (${i.id} - Size ${i.size})<br><span style="color:#666;">Rs. ${i.price.toLocaleString()}</span></div>
           <button class="btn btn-dark btn-sm" onclick="removeFromBag('${i.id}')">REMOVE</button>
         </div>
       `).join('');
@@ -1067,9 +1126,24 @@
       const phone = document.getElementById('custPhone').value.trim() || '[Phone]';
       const city = document.getElementById('custCity').value.trim() || '[City]';
       const addr = document.getElementById('custAddress').value.trim() || '[Address]';
-      const itemLines = bag.map(i => `- ${i.id}: ${i.title} (${i.size}) — Rs. ${i.price}`).join('\n');
+      const itemLines = bag.map(i => `- ${i.id}: ${i.title} (${i.size}) — Rs. ${i.price}`).join('
+');
 
-      return `HEY NOT YOUR EX'S CLOSET! I WANT TO LOCK THIS ORDER:\nTracking ID: ${currentTrackingId}\n\n${itemLines}\n\nSubtotal: Rs. ${subtotal}\n${isDigital ? 'Digital Pay Discount: -Rs. 150\nShipping: FREE' : 'COD Shipping: +Rs. 200'}\nTOTAL PAYABLE: Rs. ${total}\nPayment: ${isDigital ? 'SadaPay / NayaPay / Raast' : 'Cash on Delivery (COD)'}\n\nName: ${name}\nPhone: ${phone}\nCity: ${city}\nAddress: ${addr}`;
+      return `HEY NOT YOUR EX'S CLOSET! I WANT TO LOCK THIS ORDER:
+Tracking ID: ${currentTrackingId}
+
+${itemLines}
+
+Subtotal: Rs. ${subtotal}
+${isDigital ? 'Digital Pay Discount: -Rs. 150
+Shipping: FREE' : 'COD Shipping: +Rs. 200'}
+TOTAL PAYABLE: Rs. ${total}
+Payment: ${isDigital ? 'SadaPay / NayaPay / Raast' : 'Cash on Delivery (COD)'}
+
+Name: ${name}
+Phone: ${phone}
+City: ${city}
+Address: ${addr}`;
     }
 
     function updateReceipt() { document.getElementById('receiptPreview').textContent = getOrderSummary(); }
@@ -1147,7 +1221,7 @@
       config.insta = document.getElementById('cfgInsta').value.trim();
       config.payNumber = document.getElementById('cfgPayNumber').value.trim();
       config.payTitle = document.getElementById('cfgPayTitle').value.trim();
-      localStorage.setItem('nyec_cfg_v4', JSON.stringify(config));
+      localStorage.setItem('nyec_cfg_v5', JSON.stringify(config));
       alert("Settings saved successfully!");
     }
 
@@ -1159,7 +1233,7 @@
       const dims = document.getElementById('newDims').value.trim() || '22" x 27"';
       const cond = document.getElementById('newCond').value.trim() || '9/10';
       const notes = document.getElementById('newNotes').value.trim() || '1-of-1 curated vintage piece. Washed, steamed, and measured flat in inches.';
-      const img = document.getElementById('newImg').value.trim() || 'https://placehold.co/600x600/0E0E0E/FFFFFF?text=NEW+DROP';
+      const img = document.getElementById('newImg').value.trim() || 'https://placehold.co/600x600/E5E5E5/111111?text=NEW+DROP';
 
       if (!title || !price) { alert("Please enter at least an item title and price."); return; }
 
@@ -1199,7 +1273,7 @@
     function renderAdminReviewsList() {
       document.getElementById('adminReviewsList').innerHTML = reviews.map(r => `
         <div class="admin-row">
-          <div style="font-size:0.8rem;"><strong style="color:#FFF;">${r.author}</strong>: "${r.text.substring(0, 35)}..."</div>
+          <div style="font-size:0.8rem;"><strong style="color:#111;">${r.author}</strong>: "${r.text.substring(0, 35)}..."</div>
           <button class="btn btn-dark btn-sm" onclick="deleteReviewAdmin(${r.id})">DEL</button>
         </div>
       `).join('');
@@ -1208,7 +1282,7 @@
     function renderAdminList() {
       document.getElementById('adminInventoryList').innerHTML = items.map(i => `
         <div class="admin-row">
-          <div style="font-size:0.85rem;"><strong style="color:#fff;">${i.id}: ${i.title}</strong> [${i.category} • ${i.size}] — <span style="color:#aaa;">Rs. ${i.price}</span></div>
+          <div style="font-size:0.85rem;"><strong style="color:#111;">${i.id}: ${i.title}</strong> [${i.category} • ${i.size}] — <span style="color:#666;">Rs. ${i.price}</span></div>
           <div style="display:flex; gap:6px;">
             <button class="btn btn-dark btn-sm" onclick="toggleSoldAdmin('${i.id}')">${i.sold ? 'MAKE LIVE' : 'MARK SOLD'}</button>
             <button class="btn btn-dark btn-sm" onclick="deleteItemAdmin('${i.id}')">DEL</button>
@@ -1220,12 +1294,24 @@
     function openPolicy(type) {
       const title = document.getElementById('policyTitle');
       const body = document.getElementById('policyBody');
-      if (type === 'shipping') {
+      if (type === 'about') {
+        title.textContent = "ABOUT US";
+        body.innerHTML = "<p>Founded in 2026, Not Your Ex's Closet is a digital streetwear and vintage clothing thrift store built for the young and bold. We deliver trend-driven, high-impact fashion at speed, from elevated basics to statement pieces, all designed to reflect the now.</p>";
+      } else if (type === 'faq') {
+        title.textContent = "FREQUENTLY ASKED QUESTIONS";
+        body.innerHTML = "<p><strong>Are all items 1-of-1?</strong><br>Yes! Every piece in our drop is an authentic thrifted vintage or streetwear piece. Once claimed, it is gone forever.<br><br><strong>How do I track my order?</strong><br>Use your unique tracking ID generated at checkout and drop it in our WhatsApp or Instagram DM anytime.</p>";
+      } else if (type === 'shipping') {
         title.textContent = "SHIPPING & COD INFO";
         body.innerHTML = "<p><strong>Dispatch Time:</strong> Orders confirmed before 4 PM ship the same day.<br><br><strong>Delivery Time:</strong> 2–4 working days across Pakistan via PostEx, Leopards, or TCS.<br><br><strong>Charges:</strong> Rs. 200 flat for Cash on Delivery, or <strong>FREE</strong> when you pay via SadaPay, NayaPay, or Raast.</p>";
       } else if (type === 'returns') {
         title.textContent = "NO-DRAMA RETURN POLICY";
         body.innerHTML = "<p>Because every piece is a <strong>1-of-1 curated thrift item</strong>, we do not offer size exchanges or change-of-mind returns.<br><br>However, if we ever miss a major flaw or send the wrong item, message us within 24 hours of delivery with an unboxing video for a <strong>full refund</strong>.</p>";
+      } else if (type === 'privacy') {
+        title.textContent = "PRIVACY POLICY";
+        body.innerHTML = "<p>Your personal data, phone numbers, and delivery addresses are strictly used for order fulfillment and parcel dispatching only. We never share your details with third parties.</p>";
+      } else if (type === 'contact') {
+        title.textContent = "CONTACT US";
+        body.innerHTML = "<p>Reach out to us directly:<br><br><strong>WhatsApp:</strong> 03167271822<br><strong>Instagram:</strong> @notyo._.urexscloset<br><strong>Location:</strong> Gujranwala, Pakistan</p>";
       } else {
         title.textContent = "HOW TO MEASURE YOUR FIT";
         body.innerHTML = "<p>Grab your favorite hoodie or shirt, lay it flat on a bed, and measure:<br><br>1. <strong>Chest (Pit-to-Pit):</strong> Straight across from underarm to underarm.<br>2. <strong>Length:</strong> From the top of the shoulder collar straight down to the bottom hem.<br><br>Compare those two numbers to the inches listed on each card—guaranteed accurate fit every time.</p>";
