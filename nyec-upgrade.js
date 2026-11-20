@@ -81,7 +81,7 @@ nav button.nx-on{background:var(--ink);color:#fff;border-color:var(--ink)}
   <div class="nx-db" id="nxCartItems"></div>
   <div class="nx-df" id="nxCartFoot">
     <div class="nx-sub"><span>Subtotal</span><strong id="nxSub">Rs. 0</strong></div>
-    <p>Pay by SadaPay / NayaPay / Raast to save Rs. 150 and get free shipping. Cash on Delivery adds Rs. 200.</p>
+    <p>Pay by EasyPaisa to save Rs. 150 and get free shipping. Cash on Delivery adds Rs. 200.</p>
     <div class="nx-btns"><button class="btn" onclick="openCheckout()">Check out</button><button class="btn btn-outline" onclick="nxCloseAll()">Keep shopping</button></div>
   </div>
 </aside>
@@ -102,7 +102,7 @@ nav button.nx-on{background:var(--ink);color:#fff;border-color:var(--ink)}
       <div class="co-opt on"><span id="coShipName">Free shipping</span><b id="coShipPrice">Rs 0</b></div>
       <h3>Payment</h3>
       <input type="hidden" id="payMethod" value="DIGITAL">
-      <div class="co-opt on" id="coPayDIGITAL" onclick="nxPay('DIGITAL')"><span>SadaPay / NayaPay / Raast</span><b>Rs. 150 off</b></div>
+      <div class="co-opt on" id="coPayDIGITAL" onclick="nxPay('DIGITAL')"><span>EasyPaisa</span><b>Rs. 150 off</b></div>
       <div class="co-opt" id="coPayCOD" onclick="nxPay('COD')"><span>Cash on Delivery</span><b>+ Rs. 200</b></div>
       <div class="pay-details-box" id="digitalPayBox">
         <strong>Transfer the total to this account, then send the screenshot on WhatsApp or Instagram DM:</strong>
