@@ -38,7 +38,9 @@ nav button.nx-on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .pdp-size-btn.nx-one{flex:0 0 84px}
 #checkoutPage{display:none;background:#fff;color:var(--ink);min-height:100vh}
 .co-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:20px 24px;border-bottom:1px solid var(--line)}
-.co-back{background:none;border:0;font-size:.9rem;text-align:left;text-decoration:underline;color:var(--ink)}
+.co-back{justify-self:start;display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:10px 20px;font-size:.88rem;font-weight:500;color:var(--ink);text-decoration:none;transition:background .15s,color .15s}
+.co-back:hover{background:var(--ink);color:#fff}
+@media(max-width:900px){.co-back{padding:8px 14px;font-size:.8rem}}
 .co-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 70px)}
 .co-left{padding:40px 48px 60px;display:flex;flex-direction:column;align-items:flex-end}
 .co-left>div{width:100%;max-width:520px}
